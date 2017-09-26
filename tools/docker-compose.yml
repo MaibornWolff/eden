@@ -1,0 +1,11 @@
+version: '3'
+services:
+  tools:
+    build: .
+    restart: on-failure
+    container_name: tools
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./volume:/root/volume
