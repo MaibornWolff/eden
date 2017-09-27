@@ -1,11 +1,12 @@
 version: '3'
 services:
   tools:
-    build: .
-    restart: on-failure
+    build: .                # dockerfile is in this dir
     container_name: tools
-    entrypoint: /bin/bash
-    stdin_open: true
-    tty: true
+    stdin_open: true        # equivalent to docker run -i
+    tty: true               # equivalent to docker run -t
+    entrypoint: /bin/bash   # process of our container is the terminal itself
+    working_dir: /
     volumes:
       - ./volume:/root/volume
+      - ./volume/contracts:/oyente/oyente/contracts
