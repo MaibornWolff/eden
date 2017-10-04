@@ -1,0 +1,11 @@
+=============== Oct 4, 2017 (UTC) ===============
+11:09:21.653731 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:09:21.661882 db@open opening
+11:09:21.665246 version@stat F·[] S·0B[] Sc·[]
+11:09:21.666446 db@janitor F·2 G·0
+11:09:21.666490 db@open done T·4.594136ms
+11:23:25.859298 memdb@flush N·42139 S·3MiB
+11:23:25.899226 memdb@flush created L0@3 N·42139 S·1MiB "n:\x00..ver,v26036":"version,v1"
+11:23:25.900274 version@stat F·[1] S·1MiB[1MiB] Sc·[0.25]
+11:23:25.902607 memdb@flush committed F·1 T·42.137663ms
+11:23:25.903014 journal@remove removed @1

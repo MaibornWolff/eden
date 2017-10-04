@@ -1,7 +1,9 @@
 pragma solidity ^0.4.15;
 
-contract SomeContract {
-  function someFunction() {
-    //this is fun
-  }
+import "./strings.sol";
+
+contract Contract {
+  using strings for *;
+
+  // ...
 }

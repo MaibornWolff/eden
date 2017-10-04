@@ -18,9 +18,9 @@ TestRPC - [https://github.com/ethereumjs/testrpc](https://github.com/ethereumjs/
 
 #### Prerequisites
 
-Docker Toolbox installed. 
+Docker Toolbox installed.
 > To download and install Docker Toolbox for your environment please
-follow [the Docker Toolbox instructions](https://www.docker.com/products/docker-toolbox). 
+follow [the Docker Toolbox instructions](https://www.docker.com/products/docker-toolbox).
 
 After Docker Toolbox has been installed, create a ```default``` machine to run Docker against.
 
@@ -82,9 +82,9 @@ See ```files/genesis.json```.
 
 If you want to start mining or stop mining you need to connect to the node via:
 ```
-docker exec -it ethereumdocker_eth_1 geth attach ipc://root/.ethereum/devchain/geth.ipc
+docker exec -it node_2 geth attach ipc://root/.ethereum/devchain/geth.ipc
 ```
-Replace ethereumdocker_geth_1 with the container name you wish to connect to.
+Replace node_2 with the container name you wish to connect to.
 
 ### 2.1 Use existing DAG
 
@@ -96,7 +96,7 @@ to the monitored-geth-client Dockerfile.
 
 ## 3. Interact with swarm
 
-You can add files to swarm with 
+You can add files to swarm with
 ```
 swarm up <filename>
 ```
@@ -106,3 +106,24 @@ and afterwards you can download the file with a http request on port 8500:
 http://localhost:8500/bzz:/c5cca2b6d692c13e497bbf5d6d9399e2e3c1693e34c32129c7dbc85361147821/
 ```
 
+## 4. Interact with ENS
+
+You can use the pre-deployed ENS registry and FIFS registrar for your projects
+
+Open bootstrap container console and connect to the running geth instance:
+```
+geth attach /root/.ethereum/devchain/geth.ipc
+```
+
+Then load ensutils.js with:
+```
+loadScript('/root/files/ensutils.js’)
+```
+
+More: http://docs.ens.domains/en/latest/userguide.html#interacting
+
+ENS address:
+0x52db67a188a2ddad8433a80c494cbbb15002d125
+
+FIFS Registrar(root):
+0x90dd5486a271235be9508f62acebfd275d6e6404

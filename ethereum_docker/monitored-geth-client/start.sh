@@ -1,22 +1,32 @@
 #!/bin/bash
 set -e
 cd /root/eth-net-intelligence-api
+
 perl -pi -e "s/XXX/$(hostname)/g" app.json
+
 /usr/bin/pm2 start ./app.json
-sleep 3
-geth --datadir=~/.ethereum/devchain init "/root/files/genesis.json"
-sleep 3
-BOOTSTRAP_IP=`getent hosts bootstrap | cut -d" " -f1`
-GETH_OPTS=${@/XXX/$BOOTSTRAP_IP}
-nohup geth $GETH_OPTS  >/root/geth.log 2>&1 &
 
 sleep 3
+
+# geth --datadir=~/.ethereum/devchain init "/root/files/genesis.json"
+
+# sleep 3
+
+BOOTSTRAP_IP=`getent hosts bootstrap | cut -d" " -f1`
+GETH_OPTS=${@/XXX/$BOOTSTRAP_IP}
+
+nohup geth $GETH_OPTS
+
+sleep 3
+
 echo "GETH started"
+
 DATADIR="/root/.ethereum/devchain"
 KEYS=`geth account list --datadir $DATADIR | sed "s/.*{\(.*\)}.*/\1/1"`
 BZZKEY=$(echo $KEYS| cut -d' ' -f 1)
 
 sleep 3
+
 swarm --bzzaccount $BZZKEY \
        --datadir $DATADIR \
        --bzznetworkid 456719 \

@@ -10,3 +10,7 @@ services:
     volumes:
       - ./volume:/root/volume
       - ./volume/contracts:/oyente/oyente/contracts
+      # insert folder with your projects contracts here
+    ports:
+      - "8546:8545"
+      # avoid interference with ethereum-docker

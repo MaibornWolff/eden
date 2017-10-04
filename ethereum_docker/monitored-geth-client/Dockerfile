@@ -23,4 +23,5 @@ COPY start.sh /root/start.sh
 COPY app.json /root/eth-net-intelligence-api/app.json
 RUN chmod +x /root/start.sh
 
-ENTRYPOINT ["/root/start.sh"]
+# copy existing BC state to the nodes, so swarm ENS address is always the same
+COPY devchain /root/.ethereum/devchain
