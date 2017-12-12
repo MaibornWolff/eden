@@ -38,6 +38,14 @@ To run a single test Ethereum node run the following:
 $ docker-compose -f docker-compose-standalone.yml up -d
 ```
 
+To run a standalone Proof of Authority Developer Chain with prefunded Account use:
+
+```
+$ docker-compose -f docker-compose-standalone.dev.yml up -d
+```
+
+Prefunded Account: `0x99429f64cf4d5837620dcc293c1a537d58729b68`
+
 If using docker-machine you should be able to get to the JSON RPC client by doing:
 
 ```
