@@ -1,45 +1,54 @@
 version: '2'
 services:
-  bootstrap:
+  geth_mining:
     build: monitored-geth-client
     restart: on-failure
-    container_name: bootstrap
-    hostname: bootstrap
+    container_name: geth_mining
+    hostname: geth_mining
     links:
-      - netstats
+      - eth-netstats
     entrypoint: /root/start.sh
     command: '--datadir=~/.ethereum/devchain --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,swarm" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" --mine'
     volumes:
       - ./files/password:/root/files/password:ro
       - ./files/genesis.json:/root/files/genesis.json:ro
       - ./files/keystore:/root/.ethereum/devchain/keystore:rw
-      - /etc/localtime:/etc/localtime:ro
-      # ensutils are available on bootstrap
+
+      # cannot use localtime atm, open docker issue: https://github.com/docker/for-mac/issues/2396
+      #- /etc/localtime:/etc/localtime:ro
+
+      # ensutils are available on geth_mining
       - ./files/ensutils.js:/root/files/ensutils.js:ro
     ports:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
-  eth:
+  geth:
     build: monitored-geth-client
     restart: on-failure
+    container_name: geth
+    hostname: geth
     links:
-      - bootstrap
-      - netstats
+      - geth_mining
+      - eth-netstats
     entrypoint: /root/start.sh
     volumes:
       - ./files/password:/root/files/password:ro
       - ./files/genesis.json:/root/files/genesis.json:ro
       - ./files/keystore:/root/.ethereum/devchain/keystore:rw
-      - /etc/localtime:/etc/localtime:ro
+
+      #- /etc/localtime:/etc/localtime:ro
+
     command: '--datadir=~/.ethereum/devchain --rpccorsdomain="*" --networkid=456719 --rpc --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303"'
-  netstats:
+  eth-netstats:
     build: eth-netstats
     restart: on-failure
-    container_name: netstats
+    container_name: eth-netstats
     environment:
       - WS_SECRET=eth-net-stats-secret
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+
+    #volumes:
+      #- /etc/localtime:/etc/localtime:ro
+
     ports:
       - "3000:3000"

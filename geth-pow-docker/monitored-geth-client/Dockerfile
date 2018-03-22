@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:latest
 
 RUN apk add --update git go make gcc musl-dev linux-headers bash pwgen
 RUN git clone https://github.com/ethereum/go-ethereum.git
