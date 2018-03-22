@@ -1,4 +1,4 @@
-# DB-Ethereum-PoA
+# Ethereum-PoA
 
 Docker Ethereum Environment with Parity PoA network with 3 authorities and 3 members.
 
