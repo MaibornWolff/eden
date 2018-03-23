@@ -14,8 +14,6 @@ Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
 
 * “Toolbox” with Truffle, Oyente and some Utils
 
-EDEN is continuously updated, feel free to send pull requests!
-
 ![Screenshot of the EDEN dashboard](doc/img/eden_grafik.png)
 
 ## Download
@@ -28,7 +26,7 @@ Refer to the README files in the subfolders for instructions. Have fun! :)
 
 ## Feature request / Bug / Feedback
 
-Have a bug, a feature request or any question? [Please open a new issue](https://github.com/MaibornWolff/codecharta/issues). Feedback is always welcome.
+Have a bug, a feature request or any question? [Please open a new issue](https://github.com/MaibornWolff/eden/issues). Feedback is always welcome!
 
 ## License
 
