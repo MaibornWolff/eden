@@ -1,6 +1,6 @@
 FROM luongnguyen/oyente
 
-RUN npm install -g ethereumjs-testrpc
+RUN npm install -g ganache-cli
 
 RUN npm install -g truffle
 
