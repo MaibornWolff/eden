@@ -7,7 +7,7 @@ Docker Ethereum Environment with Parity PoA network with 3 authorities and 3 mem
 ### Setup
 
 0. Install [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/)
-1. Run `git clone https://github.com/dstarcev/parity-poa-playground.git && cd parity-poa-playground`
+1. Run `git clone git@github.com:MaibornWolff/eden.git && cd eden/parity-poa-docker`
 2. Run `docker-compose up -d`
 
 ### Access the Parity UI
