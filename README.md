@@ -4,7 +4,7 @@ Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
 
 ## What is EDEN exactly?
 
-**E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable App developers to create new prototypes fast and effectively. 
+**E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable app developers to create new prototypes fast and effectively. 
 
 ![Screenshot of the EDEN dashboard](doc/img/eden_grafik.png)
 
