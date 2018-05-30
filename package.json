@@ -2,6 +2,7 @@
     "name": "mw-eden",
     "description": "Ethereum Development Environment from MaibornWolff GmbH",
     "version": "0.1.0",
+    "license": "MIT",
     "scripts": {
         "start:geth:pow": "cd geth-pow-docker && docker-compose up -d ",
         "start:parity:poa": "cd parity-poa-docker && docker-compose up -d ",
