@@ -12,7 +12,7 @@ Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
 
 * Private “proof-of-work” Blockchain (2x Geth) + EthStats Dashboard
 
-* Private “proof-of-authority” Blockchain (6x Parity) + EthStats Dashboard
+* Private “proof-of-authority” Blockchain (6x Parity) + EthStats Dashboard + Ether Explorer v2
 
 * “Toolbox” with Truffle, Oyente and some Utils
 
