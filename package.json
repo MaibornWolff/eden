@@ -1,0 +1,14 @@
+{
+    "name": "mw-eden",
+    "description": "Ethereum Development Environment from MaibornWolff GmbH",
+    "version": "0.1.0",
+    "author": {
+        "name": "MaibornWolff GmbH",
+        "email": "eden@maibornwolff.de"
+    },
+    "contributors": [
+        "Frank Polster <frank.polster@maibornwolff.de>",
+        "Florian Maier <florian.maier@maibornwolff.de>",
+        "Simon Dosch <simon.dosch@maibornwolff.de>"
+    ]
+}
