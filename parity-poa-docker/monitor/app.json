@@ -1,6 +1,6 @@
 [
   {
-    "name": "DB Station und Service AG",
+    "name": "authroity0",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -13,14 +13,14 @@
       "RPC_HOST": "authority0",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "DB Station und Service AG",
+      "INSTANCE_NAME": "authroity0",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3
     }
   },
   {
-    "name": "DB Systel AG",
+    "name": "authority1",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -33,14 +33,14 @@
       "RPC_HOST": "authority1",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "DB Systel AG",
+      "INSTANCE_NAME": "authority1",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3
     }
   },
   {
-    "name": "DB Schenker AG",
+    "name": "authority2",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -53,14 +53,14 @@
       "RPC_HOST": "authority2",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "DB Schenker AG",
+      "INSTANCE_NAME": "authority2",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3
     }
   },
   {
-    "name": "ICE 1539",
+    "name": "member0",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -73,14 +73,14 @@
       "RPC_HOST": "member0",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "ICE 1539",
+      "INSTANCE_NAME": "member0",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3
     }
   },
   {
-    "name": "Frankfurt Hbf",
+    "name": "member1",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -93,14 +93,14 @@
       "RPC_HOST": "member1",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "Frankfurt Hbf",
+      "INSTANCE_NAME": "member1",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3
     }
   },
   {
-    "name": "Berlin Hbf",
+    "name": "member2",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -113,7 +113,7 @@
       "RPC_HOST": "member2",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "Berlin Hbf",
+      "INSTANCE_NAME": "member2",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3
