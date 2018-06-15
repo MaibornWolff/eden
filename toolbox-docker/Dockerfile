@@ -1,5 +1,8 @@
 FROM luongnguyen/oyente
 
+RUN npm install n -g
+RUN n stable
+
 RUN npm install -g ganache-cli
 
 RUN npm install -g truffle
