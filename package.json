@@ -1,0 +1,21 @@
+{
+    "name": "mw-eden",
+    "description": "Ethereum Development Environment from MaibornWolff GmbH",
+    "version": "0.1.0",
+    "license": "MIT",
+    "scripts": {
+        "start:geth:pow": "cd geth-pow-docker && docker-compose up -d ",
+        "start:parity:poa": "cd parity-poa-docker && docker-compose up -d ",
+        "stop:geth:pow": "cd geth-pow-docker && docker-compose stop ",
+        "stop:parity:poa": "cd parity-poa-docker && docker-compose stop "
+    },
+    "author": {
+        "name": "MaibornWolff GmbH",
+        "email": "eden@maibornwolff.de"
+    },
+    "contributors": [
+        "Frank Polster <frank.polster@maibornwolff.de>",
+        "Florian Maier <florian.maier@maibornwolff.de>",
+        "Simon Dosch <simon.dosch@maibornwolff.de>"
+    ]
+}
