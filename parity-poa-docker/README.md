@@ -17,9 +17,10 @@ Run `docker-compose logs | grep token=` to get an authenticated URL for the Pari
 A nice dashboard is already configured and connected with all the nodes.
 Find it at [http://127.0.0.1:3001](http://127.0.0.1:3001).
 
-### Access the [ethexplorer](http://github.com/carsenk/explorer) dashboard.
+### Access the [blockchain explorer](https://bitbucket.org/designisdead/blockchain-explorer.git) dashboard.
 A nice Blockchain Explorer is already configured and connected with all the nodes.
 Find it at [http://127.0.0.1:3002](http://127.0.0.1:3002).
+Please point your Metamask to http://127.0.0.1:8545 to see the current state of your Blockchain.
 
 ### Accounts
 There is already an account with an empty password that has enough ether:

@@ -1,18 +1,14 @@
-FROM node:9-alpine
-WORKDIR /app
+FROM node:6.11-alpine
 
-RUN apk add --no-cache --virtual .gyp \
-    python \
-    make \
-    g++ \
-    git 
+WORKDIR "/opt"
 
-RUN npm install -g bower
-RUN git clone https://github.com/appliedblockchain/explorer.git .
-COPY config.js .
+RUN apk add --update git make g++ && \
+    git clone https://bitbucket.org/designisdead/blockchain-explorer.git
+
+WORKDIR "/opt/blockchain-explorer"
+RUN git checkout c6e12f1
 RUN npm install
-RUN bower install --allow-root
-
-EXPOSE 3000
 
 CMD npm run start
+
+EXPOSE 8080

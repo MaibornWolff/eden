@@ -102,12 +102,15 @@ services:
       app_net:
         ipv4_address: 172.16.0.200
 
-  explorer:
-    build: explorer
+  geth-explorer:
+    hostname: geth-explorer
+    depends_on:
+      - member0
     ports:
-      - 3002:3000
-    environment:
-      - PORT=3000
+      - 3002:8080
+    build:
+      context: ./explorer
+    container_name: geth-explorer
     networks: 
       app_net:
         ipv4_address: 172.16.0.201      
