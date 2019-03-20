@@ -1,23 +1,22 @@
 [
   {
-    "name"              : "node-app",
+    "name"              : "XXX",
     "script"            : "app.js",
     "log_date_format"   : "YYYY-MM-DD HH:mm Z",
     "merge_logs"        : false,
-    "watch"             : false,
+    "watch"             : true,
     "max_restarts"      : 10,
     "exec_interpreter"  : "node",
     "exec_mode"         : "fork_mode",
-    "env":
-    {
+    "env": {
       "NODE_ENV"        : "production",
-      "RPC_HOST"        : "localhost",
+      "RPC_HOST"        : "geth_mining",
       "RPC_PORT"        : "8545",
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "XXX",
-      "WS_SERVER"       : "ws://netstats:3000",
+      "WS_SERVER"       : "ws://dashboard:3000",
       "WS_SECRET"       : "eth-net-stats-secret",
-      "VERBOSITY"       : 2
+      "VERBOSITY"       : 3
     }
   }
 ]

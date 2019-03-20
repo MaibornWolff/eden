@@ -20,6 +20,7 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
+
   geth:
     build: monitored-geth-client
     restart: on-failure
@@ -30,14 +31,19 @@ services:
       - ./files/genesis.json:/root/files/genesis.json:ro
       - ./files/keystore:/root/.ethereum/devchain/keystore:rw
     command: '--datadir=~/.ethereum/devchain --rpccorsdomain="*" --networkid=456719 --rpc --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@127.0.0.1:30303"'
-  eth-netstats:
-    build: eth-netstats
-    restart: on-failure
-    container_name: eth-netstats
-    environment:
-      - WS_SECRET=eth-net-stats-secret
+
+  monitor:
+    image: buythewhale/ethstats_monitor
+    volumes:
+      - ./monitored-geth-client/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+
+  dashboard:
+    image: buythewhale/ethstats
+    volumes:
+      - ./monitored-geth-client/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
       - "3000:3000"
+
   explorer:
     build: explorer
     restart: always
