@@ -29,6 +29,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.swp
 
 # IDE - VSCode
 .vscode/*
