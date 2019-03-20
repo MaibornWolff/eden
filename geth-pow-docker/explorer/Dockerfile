@@ -1,18 +1,13 @@
-FROM node:9-alpine
+FROM node:8-alpine
+
 WORKDIR /app
 
-RUN apk add --no-cache --virtual .gyp \
-    python \
-    make \
-    g++ \
-    git
+RUN apk add --update git python make g++
+RUN git clone https://github.com/gobitfly/etherchain-light --recursive .
 
-RUN npm install -g bower
-RUN git clone https://github.com/appliedblockchain/explorer.git .
-COPY config.js .
 RUN npm install
-RUN bower install --allow-root
+COPY config.js .
 
 EXPOSE 3000
 
-CMD npm run start
+CMD [ "npm", "start" ]

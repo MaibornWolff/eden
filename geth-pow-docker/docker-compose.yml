@@ -8,7 +8,7 @@ services:
     links:
       - eth-netstats
     entrypoint: /root/start.sh
-    command: '--datadir=~/.ethereum/devchain --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,swarm" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" --mine'
+    command: '--datadir=~/.ethereum/devchain --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,swarm" --rpccorsdomain="*" --rpcvhosts="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" --mine'
     volumes:
       - ./files/password:/root/files/password:ro
       - ./files/genesis.json:/root/files/genesis.json:ro
@@ -51,10 +51,6 @@ services:
 
   explorer:
     build: explorer
+    restart: always
     ports:
       - 3002:3000
-    environment:
-      - PORT=3000
-
-    #volumes:
-      #- /etc/localtime:/etc/localtime:ro
