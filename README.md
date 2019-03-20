@@ -10,7 +10,7 @@
 
 * “Toolbox” with Truffle, Oyente and some Utils
 
-![Screenshot of the EDEN dashboard](doc/img/eden_grafik.png)
+![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
 
 ## Getting Started
 
@@ -40,10 +40,10 @@ We use [SemVer](http://semver.org) for versioning. For the versions available, s
 
 ## Authors
 
-Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de)
-
 See also the list of [contributors](https://github.com/MaibornWolff/eden/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de)
