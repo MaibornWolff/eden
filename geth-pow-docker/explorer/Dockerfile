@@ -5,7 +5,7 @@ RUN apk add --no-cache --virtual .gyp \
     python \
     make \
     g++ \
-    git 
+    git
 
 RUN npm install -g bower
 RUN git clone https://github.com/appliedblockchain/explorer.git .

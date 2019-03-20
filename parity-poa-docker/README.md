@@ -38,7 +38,7 @@ You may also want to change the list of prefunded accounts in `parity/config/cha
 
 Add JSON-formatted ethereum accounts to `parity/keys` and they will appear in the UI.
 
-### Access JSON RPC 
+### Access JSON RPC
 Talk to JSON RPC at [http://127.0.0.1:8545](http://127.0.0.1:8545) with your favorite client.
 
 Be kind and send the poor an ether!
@@ -46,4 +46,3 @@ Be kind and send the poor an ether!
 ```
 curl --data '{"jsonrpc":"2.0","method":"personal_sendTransaction","params":[{"from":"0x6B0c56d1Ad5144b4d37fa6e27DC9afd5C2435c3B","to":"0x00E3d1Aa965aAfd61217635E5f99f7c1e567978f","value":"0xde0b6b3a7640000"}, ""],"id":0}' -H "Content-Type: application/json" -X POST localhost:8545
 ```
-

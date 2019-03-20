@@ -6,7 +6,7 @@ The testnet consists out of multiple parts :
 * 2 Miners - Also called **sealers** with proof-of-authority. They validate the blocks. No RPC is exposed as they are required to be unlocked.
 * 1 Node - This serves as **transaction relay** and is a fullnode that does not mine, is locked but has RPC exposed
 * 2 Swarm nodes - These nodes make up the **peer-to-peer CDN**
-* 1 Blockchain explorer - Lightweight web application to explore the blockchain through web application. 
+* 1 Blockchain explorer - Lightweight web application to explore the blockchain through web application.
 
 ## Usage
 Setting up this networks requires you to install Docker. Clone the repository, and run `docker-compose up` from the repository root. The network should start and synchronize without any further configuration. The networks always uses the latest available versions of Ethereum and Swarm, the network is set up for clique proof-of-authority similar to the Ethereum Rinkeby testnet. For more information on clique POA see https://github.com/ethereum/EIPs/issues/225 .
