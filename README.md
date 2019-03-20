@@ -30,12 +30,16 @@ git clone https://github.com/MaibornWolff/eden.git
 
 Refer to the README file of each blockchain. They are in the project subfolders. Have fun! :)
 
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+
 ## Authors
 
-Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
+Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de)
 
 See also the list of [contributors](https://github.com/MaibornWolff/eden/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
