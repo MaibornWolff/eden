@@ -1,12 +1,6 @@
 # Ethereum Development Environment and Network (EDEN)
 
-Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
-
-## What is EDEN exactly?
-
 **E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable app developers to create new prototypes fast and effectively.
-
-![Screenshot of the EDEN dashboard](doc/img/eden_grafik.png)
 
 **Contents:**
 
@@ -16,19 +10,32 @@ Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
 
 * “Toolbox” with Truffle, Oyente and some Utils
 
+![Screenshot of the EDEN dashboard](doc/img/eden_grafik.png)
 
-## Download
+## Getting Started
 
-The latest version will always be available in the master branch.
+* Get a local copy of the repository, master branch is the latest version available:
 
-## Quickstart Guide
+```
+git clone https://github.com/MaibornWolff/eden.git
+```
 
-Refer to the README files in the subfolders for instructions. Have fun! :)
+* Install [NodeJS](https://nodejs.org)
 
-## Feature request / Bug / Feedback
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-Have a bug, a feature request or any question? [Please open a new issue](https://github.com/MaibornWolff/eden/issues). Feedback is always welcome!
+* Install [EditorConfig](https://editorconfig.org/#download) plugin for your editor/IDE
+
+### Installing
+
+Refer to the README file of each blockchain. They are in the project subfolders. Have fun! :)
+
+## Authors
+
+Developed with :green_heart: by [MaibornWolff](https://www.maibornwolff.de/)
+
+See also the list of [contributors](https://github.com/MaibornWolff/eden/contributors) who participated in this project.
 
 ## License
 
-see [LICENSE](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
