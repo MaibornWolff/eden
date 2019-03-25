@@ -152,7 +152,7 @@ services:
     volumes:
       - ./dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
-      - 8008:3000
+      - 3000:3000
     networks:
       chainnet:
         ipv4_address: 172.25.0.136
