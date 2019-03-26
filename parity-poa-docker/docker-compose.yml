@@ -111,9 +111,9 @@ services:
     build:
       context: ./explorer
     container_name: geth-explorer
-    networks: 
+    networks:
       app_net:
-        ipv4_address: 172.16.0.201      
+        ipv4_address: 172.16.0.201
 
 volumes:
   authorities0:
