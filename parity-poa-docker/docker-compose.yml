@@ -107,7 +107,7 @@ services:
     depends_on:
       - member0
     ports:
-      - 3002:8080
+      - 8080:8080
     build:
       context: ./explorer
     container_name: geth-explorer
