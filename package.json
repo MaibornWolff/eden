@@ -18,5 +18,9 @@
         "Florian Maier <florian.maier@maibornwolff.de>",
         "Simon Dosch <simon.dosch@maibornwolff.de>",
         "Deniz Toprak <deniz.toprak@maibornwolff.de>"
-    ]
+    ],
+    "devDependencies": {
+        "@commitlint/cli": "^7.5.2",
+        "@commitlint/config-conventional": "^7.5.0"
+    }
 }
