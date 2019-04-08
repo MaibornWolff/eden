@@ -102,8 +102,8 @@ services:
       app_net:
         ipv4_address: 172.16.0.200
 
-  geth-explorer:
-    hostname: geth-explorer
+  parity-explorer:
+    hostname: parity-explorer
     depends_on:
       - member0
     ports:
@@ -111,9 +111,9 @@ services:
     build:
       context: ./explorer
       cache_from:
-        - maibornwolff/eden:geth-explorer
-    image: maibornwolff/eden:geth-explorer
-    container_name: geth-explorer
+        - maibornwolff/eden:parity-explorer
+    image: maibornwolff/eden:parity-explorer
+    container_name: parity-explorer
     networks:
       app_net:
         ipv4_address: 172.16.0.201
