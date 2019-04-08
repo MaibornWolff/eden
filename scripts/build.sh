@@ -1,7 +1,4 @@
 #!/bin/sh
-cd geth-poa-docker
-docker-compose build --pull
-cd geth-pow-docker
-docker-compose build --pull
-cd parity-poa-docker
-docker-compose build --pull
+docker-compose -f geth-poa-docker/docker-compose.yml build --pull
+docker-compose -f geth-pow-docker/docker-compose.yml build --pull
+docker-compose -f parity-poa-docker/docker-compose.yml build --pull
