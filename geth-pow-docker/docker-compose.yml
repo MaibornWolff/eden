@@ -1,7 +1,11 @@
-version: '2'
+version: '3.2'
 services:
   geth_mining:
-    build: monitored-geth-client
+    build:
+      context: monitored-geth-client
+      cache_from:
+        - maibornwolff/eden:geth_mining
+    image: maibornwolff/eden:geth_mining
     restart: on-failure
     container_name: geth_mining
     hostname: geth_mining
@@ -24,7 +28,11 @@ services:
       - "30303:30303/udp"
       - "8545:8545"
   geth:
-    build: monitored-geth-client
+    build:
+      context: monitored-geth-client
+      cache_from:
+        - maibornwolff/eden:geth
+    image: maibornwolff/eden:geth
     restart: on-failure
     container_name: geth
     hostname: geth
@@ -41,7 +49,11 @@ services:
 
     command: '--datadir=~/.ethereum/devchain --rpccorsdomain="*" --networkid=456719 --rpc --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303"'
   eth-netstats:
-    build: eth-netstats
+    build:
+      context: eth-netstats
+      cache_from:
+        - maibornwolff/eden:eth-netstats
+    image: maibornwolff/eden:eth-netstats
     restart: on-failure
     container_name: eth-netstats
     environment:
@@ -50,7 +62,11 @@ services:
       - "3000:3000"
 
   explorer:
-    build: explorer
+    build:
+      context: explorer
+      cache_from:
+        - maibornwolff/eden:explorer
+    image: maibornwolff/eden:explorer
     ports:
       - 3002:3000
     environment:

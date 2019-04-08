@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.2'
 services:
   authority0:
     image: parity/parity:${PARITY_VERSION}
@@ -110,6 +110,9 @@ services:
       - 3002:8080
     build:
       context: ./explorer
+      cache_from:
+        - maibornwolff/eden:geth-explorer
+    image: maibornwolff/eden:geth-explorer
     container_name: geth-explorer
     networks:
       app_net:
