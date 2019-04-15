@@ -1,14 +1,11 @@
-version: '2'
+version: "3"
 services:
   geth_mining:
     build: monitored-geth-client
     restart: on-failure
     container_name: geth_mining
-    hostname: geth_mining
-    links:
-      - eth-netstats
     entrypoint: /root/start.sh
-    command: '--datadir=~/.ethereum/devchain --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,swarm" --rpccorsdomain="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" --mine'
+    command: '--datadir=~/.ethereum/devchain --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3,swarm" --rpccorsdomain="*" --rpcvhosts="*" --networkid=456719 --rpc --rpcaddr="0.0.0.0" --mine'
     volumes:
       - ./files/password:/root/files/password:ro
       - ./files/genesis.json:/root/files/genesis.json:ro
@@ -23,38 +20,32 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
+
   geth:
     build: monitored-geth-client
     restart: on-failure
     container_name: geth
-    hostname: geth
-    links:
-      - geth_mining
-      - eth-netstats
     entrypoint: /root/start.sh
     volumes:
       - ./files/password:/root/files/password:ro
       - ./files/genesis.json:/root/files/genesis.json:ro
       - ./files/keystore:/root/.ethereum/devchain/keystore:rw
+    command: '--datadir=~/.ethereum/devchain --rpccorsdomain="*" --networkid=456719 --rpc --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@127.0.0.1:30303"'
 
-      #- /etc/localtime:/etc/localtime:ro
+  monitor:
+    image: buythewhale/ethstats_monitor
+    volumes:
+      - ./monitored-geth-client/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
 
-    command: '--datadir=~/.ethereum/devchain --rpccorsdomain="*" --networkid=456719 --rpc --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303"'
-  eth-netstats:
-    build: eth-netstats
-    restart: on-failure
-    container_name: eth-netstats
-    environment:
-      - WS_SECRET=eth-net-stats-secret
+  dashboard:
+    image: buythewhale/ethstats
+    volumes:
+      - ./monitored-geth-client/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
       - "3000:3000"
 
   explorer:
     build: explorer
+    restart: always
     ports:
       - 3002:3000
-    environment:
-      - PORT=3000
-
-    #volumes:
-      #- /etc/localtime:/etc/localtime:ro
