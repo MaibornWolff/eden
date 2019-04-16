@@ -1,7 +1,9 @@
 version: "3"
 services:
   geth_mining:
-    build: monitored-geth-client
+    build:
+      context: monitored-geth-client
+    image: maibornwolff/eden:geth_mining
     restart: on-failure
     container_name: geth_mining
     entrypoint: /root/start.sh
@@ -22,7 +24,9 @@ services:
       - "8545:8545"
 
   geth:
-    build: monitored-geth-client
+    build:
+      context: monitored-geth-client
+    image: maibornwolff/eden:geth
     restart: on-failure
     container_name: geth
     entrypoint: /root/start.sh
@@ -45,7 +49,9 @@ services:
       - "3000:3000"
 
   explorer:
-    build: explorer
+    build:
+      context: explorer
+    image: maibornwolff/eden:explorer
     restart: always
     ports:
       - 3002:3000

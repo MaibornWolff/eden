@@ -1,4 +1,4 @@
-version: '2.1'
+version: "2.1"
 services:
   authority0:
     image: parity/parity:${PARITY_VERSION}
@@ -102,15 +102,16 @@ services:
       app_net:
         ipv4_address: 172.16.0.200
 
-  geth-explorer:
-    hostname: geth-explorer
+  parity-explorer:
+    hostname: parity-explorer
     depends_on:
       - member0
     ports:
       - 3002:8080
     build:
       context: ./explorer
-    container_name: geth-explorer
+    image: maibornwolff/eden:parity-explorer
+    container_name: parity-explorer
     networks:
       app_net:
         ipv4_address: 172.16.0.201
