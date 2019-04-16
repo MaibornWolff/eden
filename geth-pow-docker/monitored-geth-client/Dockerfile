@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 RUN apk add --update git go make gcc musl-dev linux-headers bash pwgen
-RUN git clone https://github.com/ethereum/go-ethereum.git
+RUN git clone --depth=1 https://github.com/ethereum/go-ethereum.git
 
 RUN \
   (cd go-ethereum && make geth && make swarm)             && \
@@ -14,7 +14,7 @@ RUN apk update &&\
     apk add git nodejs-npm bash perl
 
 RUN cd /root &&\
-    git clone https://github.com/cubedro/eth-net-intelligence-api &&\
+    git clone --depth=1 https://github.com/cubedro/eth-net-intelligence-api &&\
     cd eth-net-intelligence-api &&\
     npm install &&\
     npm install -g pm2
