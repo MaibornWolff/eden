@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3"
 services:
   geth-bootnode:
     hostname: geth-bootnode
@@ -6,8 +6,6 @@ services:
       - nodekeyhex=08f0e1dee5c1b4645f3331a566009e41a4514b6cd28656d63d0449ecf812812b #Needs to be fix, so that the miners know the resulting enode id
     build:
       context: ./bootnode
-      cache_from:
-        - maibornwolff/eden:geth-bootnode
     image: maibornwolff/eden:geth-bootnode
     ports:
       - 30301:30301/udp
@@ -25,8 +23,6 @@ services:
       - bootnodeIp=172.25.0.101
     build:
       context: ./miner
-      cache_from:
-        - maibornwolff/eden:geth-dev-miner-1
       args:
         privatekey: df504d175ae63abf209bad9dda965310d99559620550e74521a6798a41215f46 # Please don't do something like this in production, okay?
         password: pass
@@ -48,8 +44,6 @@ services:
       - bootnodeIp=172.25.0.101
     build:
       context: ./miner
-      cache_from:
-        - maibornwolff/eden:geth-dev-miner-2
       args:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: word
@@ -71,8 +65,6 @@ services:
       - bootnodeIp=172.25.0.101
     build:
       context: ./node
-      cache_from:
-        - maibornwolff/eden:geth-dev-node
       args:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: word
@@ -101,8 +93,6 @@ services:
       - bootnodeIp=172.25.0.101
     build:
       context: ./swarm
-      cache_from:
-        - maibornwolff/eden:geth-dev-swarm-1
       args:
         privatekey: df504d175ae63abf209bad9dda965310d99559620550e74521a6798a41215f46
         password: pass
@@ -127,8 +117,6 @@ services:
       - bootnodeIp=172.25.0.101
     build:
       context: ./swarm
-      cache_from:
-        - maibornwolff/eden:geth-dev-swarm-2
       args:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: pass
@@ -151,8 +139,6 @@ services:
       - 8080:8080
     build:
       context: ./explorer
-      cache_from:
-        - maibornwolff/eden:geth-explorer
     image: maibornwolff/eden:geth-explorer
     container_name: geth-explorer
     networks:

@@ -1,4 +1,4 @@
-version: '3.2'
+version: "2.1"
 services:
   authority0:
     image: parity/parity:${PARITY_VERSION}
@@ -110,8 +110,6 @@ services:
       - 3002:8080
     build:
       context: ./explorer
-      cache_from:
-        - maibornwolff/eden:parity-explorer
     image: maibornwolff/eden:parity-explorer
     container_name: parity-explorer
     networks:
