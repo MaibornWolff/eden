@@ -108,8 +108,7 @@ services:
       - member0
     ports:
       - 3002:8080
-    build:
-      context: ./explorer
+    build: ./explorer
     image: maibornwolff/eden:parity-explorer
     container_name: parity-explorer
     networks:

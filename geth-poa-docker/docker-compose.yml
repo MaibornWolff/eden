@@ -4,8 +4,7 @@ services:
     hostname: geth-bootnode
     environment:
       - nodekeyhex=08f0e1dee5c1b4645f3331a566009e41a4514b6cd28656d63d0449ecf812812b #Needs to be fix, so that the miners know the resulting enode id
-    build:
-      context: ./bootnode
+    build: ./bootnode
     image: maibornwolff/eden:geth-bootnode
     ports:
       - 30301:30301/udp
@@ -137,8 +136,7 @@ services:
       - geth-dev-node
     ports:
       - 8080:8080
-    build:
-      context: ./explorer
+    build: ./explorer
     image: maibornwolff/eden:geth-explorer
     container_name: geth-explorer
     networks:
