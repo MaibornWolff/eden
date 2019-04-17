@@ -2,6 +2,7 @@ version: '3'
 services:
   tools:
     build: .                # dockerfile is in this dir
+    image: maibornwolff/eden:tools
     container_name: tools
     stdin_open: true        # equivalent to docker run -i
     tty: true               # equivalent to docker run -t
