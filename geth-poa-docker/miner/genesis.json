@@ -10,6 +10,7 @@
     "constantinopleBlock": 5,
     "petersburgBlock": 6,
     "istanbulBlock": 7,
+    "berlinBlock": 8,
     "clique": {
       "period": 5,
       "epoch": 30000
