@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   geth-bootnode:
     hostname: geth-bootnode
@@ -107,53 +108,154 @@ services:
       chainnet:
         ipv4_address: 172.25.0.110
 
-  geth-dev-swarm-1:
-    hostname: geth-dev-swarm-1
-    depends_on:
-      - geth-dev-node
+  clef-1:
+    hostname: clef-1
+    container_name: clef-1
+    image: ethersphere/clef:0.4.9
+    restart: unless-stopped
     environment:
-      - address=8cc5a1a0802db41db826c2fcb72423744338dcb0 #derived from the private key which is passed in the args
-      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
-      - bootnodeIp=172.25.0.101
-    build:
-      context: ./swarm
-      args:
-        privatekey: df504d175ae63abf209bad9dda965310d99559620550e74521a6798a41215f46
-        password: pass
-    image: maibornwolff/eden:geth-dev-swarm-1
-    container_name: geth-dev-swarm-1
+      - CLEF_CHAINID=6660001
     ports:
-      - 8500:8500
-      - 30399:30399/udp
+      - 8550:8550
     volumes:
-      - eth-data-4:/root/.ethash
+      - clef-1:/app/data
+    command: full
     networks:
       chainnet:
         ipv4_address: 172.25.0.111
 
-  geth-dev-swarm-2:
-    hostname: geth-dev-miner-3
-    depends_on:
-      - geth-dev-node
+  bee-1:
+    hostname: bee-1
+    container_name: bee-1
+    image: ethersphere/bee:0.5.3
+    restart: unless-stopped
     environment:
-      - address=3590aca93338b0721966a8d0c96ebf2c4c87c544 #derived from the private key which is passed in the args
-      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
-      - bootnodeIp=172.25.0.101
-    build:
-      context: ./swarm
-      args:
-        privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
-        password: pass
-    image: maibornwolff/eden:geth-dev-swarm-2
-    container_name: geth-dev-swarm-2
+      - BEE_API_ADDR=:1633
+      - BEE_BOOTNODE=
+      - BEE_BOOTNODE_MODE=true
+      - BEE_CLEF_SIGNER_ENABLE=true
+      - BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
+      - BEE_CONFIG
+      - BEE_CORS_ALLOWED_ORIGINS
+      - BEE_DATA_DIR
+      - BEE_DB_CAPACITY
+      - BEE_DB_OPEN_FILES_LIMIT
+      - BEE_DB_BLOCK_CACHE_CAPACITY
+      - BEE_DB_WRITE_BUFFER_SIZE
+      - BEE_DB_DISABLE_SEEKS_COMPACTION
+      - BEE_DEBUG_API_ADDR=:1635
+      - BEE_DEBUG_API_ENABLE=true
+      - BEE_GATEWAY_MODE
+      - BEE_GLOBAL_PINNING_ENABLE
+      - BEE_NAT_ADDR
+      - BEE_NETWORK_ID=6660002
+      - BEE_P2P_ADDR=:1634
+      - BEE_P2P_QUIC_ENABLE
+      - BEE_P2P_WS_ENABLE
+      - BEE_PASSWORD=pass
+      - BEE_PASSWORD_FILE
+      - BEE_PAYMENT_EARLY
+      - BEE_PAYMENT_THRESHOLD
+      - BEE_PAYMENT_TOLERANCE
+      - BEE_RESOLVER_OPTIONS
+      - BEE_STANDALONE
+      - BEE_SWAP_ENABLE
+      - BEE_SWAP_ENDPOINT=http://localhost:8545
+      - BEE_SWAP_FACTORY_ADDRESS
+      - BEE_SWAP_INITIAL_DEPOSIT
+      - BEE_TRACING_ENABLE
+      - BEE_TRACING_ENDPOINT
+      - BEE_TRACING_SERVICE_NAME
+      - BEE_VERBOSITY=trace
+      - BEE_WELCOME_MESSAGE=
     ports:
-      - 8501:8500
-      - 30340:30399/udp
+      - "${API_ADDR:-1633}${BEE_API_ADDR:-:1633}"
+      - "${P2P_ADDR:-1634}${BEE_P2P_ADDR:-:1634}"
+      - "${DEBUG_API_ADDR:-127.0.0.1:1635}${BEE_DEBUG_API_ADDR:-:1635}"
     volumes:
-      - eth-data-5:/root/.ethash
+      - bee-1:/home/bee/.bee
+    command: start
+    depends_on:
+      - clef-1
+      - geth-dev-node
     networks:
       chainnet:
         ipv4_address: 172.25.0.112
+
+  clef-2:
+    hostname: clef-2
+    container_name: clef-2
+    image: ethersphere/clef:0.4.9
+    restart: unless-stopped
+    environment:
+      - CLEF_CHAINID=6660001
+    ports:
+      - 9550:8550
+    volumes:
+      - clef-2:/app/data
+    command: full
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.113
+
+  bee-2:
+    hostname: bee-2
+    container_name: bee-2
+    image: ethersphere/bee:0.5.3
+    restart: unless-stopped
+    environment:
+      - BEE_API_ADDR=:2633
+      - BEE_BOOTNODE=http://localhost:1633 # or 1634 for p2p?
+      - BEE_BOOTNODE_MODE=false
+      - BEE_CLEF_SIGNER_ENABLE=true
+      - BEE_CLEF_SIGNER_ENDPOINT=http://clef-2:9550
+      - BEE_CONFIG
+      - BEE_CORS_ALLOWED_ORIGINS
+      - BEE_DATA_DIR
+      - BEE_DB_CAPACITY
+      - BEE_DB_OPEN_FILES_LIMIT
+      - BEE_DB_BLOCK_CACHE_CAPACITY
+      - BEE_DB_WRITE_BUFFER_SIZE
+      - BEE_DB_DISABLE_SEEKS_COMPACTION
+      - BEE_DEBUG_API_ADDR=:2635
+      - BEE_DEBUG_API_ENABLE=true
+      - BEE_GATEWAY_MODE
+      - BEE_GLOBAL_PINNING_ENABLE
+      - BEE_NAT_ADDR
+      - BEE_NETWORK_ID=6660002
+      - BEE_P2P_ADDR=:2634
+      - BEE_P2P_QUIC_ENABLE
+      - BEE_P2P_WS_ENABLE
+      - BEE_PASSWORD=word
+      - BEE_PASSWORD_FILE
+      - BEE_PAYMENT_EARLY
+      - BEE_PAYMENT_THRESHOLD
+      - BEE_PAYMENT_TOLERANCE
+      - BEE_RESOLVER_OPTIONS
+      - BEE_STANDALONE
+      - BEE_SWAP_ENABLE
+      - BEE_SWAP_ENDPOINT=http://localhost:8545
+      - BEE_SWAP_FACTORY_ADDRESS
+      - BEE_SWAP_INITIAL_DEPOSIT
+      - BEE_TRACING_ENABLE
+      - BEE_TRACING_ENDPOINT
+      - BEE_TRACING_SERVICE_NAME
+      - BEE_VERBOSITY=trace
+      - BEE_WELCOME_MESSAGE
+    ports:
+      - 2633:1633
+      - 2634:1634
+      - 2635:1635
+    volumes:
+      - bee-2:/home/bee/.bee
+    command: start
+    depends_on:
+      - clef-2
+      - geth-dev-node
+      - bee-1
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.114
 
   geth-explorer:
     hostname: geth-explorer
@@ -181,6 +283,26 @@ services:
     networks:
       chainnet:
         ipv4_address: 172.25.0.126
+
+  #  blockscount-explorer:
+  #    hostname: blockscount-explorer
+  #    depends_on:
+  #      - geth-dev-node
+  #    build:
+  #      context: ./blockscount
+  #      args:
+  #        COIN: ETH
+  #    image: maibornwolff/eden:blockscount-explorer
+  #    container_name: blockscount-explorer
+  #    environment:
+  #      - ETHEREUM_JSONRPC_VARIANT=geth
+  #      - ETHEREUM_JSONRPC_HTTP_URL=http://localhost:8545
+  #      - ETHEREUM_JSONRPC_WS_URL=http://localhost:8546
+  #    ports:
+  #      - 4000:4000
+  #    networks:
+  #      chainnet:
+  #        ipv4_address: 172.25.0.127
 
   monitor:
     hostname: monitor
@@ -220,6 +342,7 @@ volumes:
   eth-data-1:
   eth-data-2:
   eth-data-3:
-  eth-data-4:
-  eth-data-5:
-  eth-data-6:
+  clef-1:
+  bee-1:
+  clef-2:
+  bee-2:
