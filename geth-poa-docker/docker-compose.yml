@@ -288,21 +288,39 @@ services:
   #    hostname: blockscount-explorer
   #    depends_on:
   #      - geth-dev-node
+  #      - blockscount-postgres
   #    build:
   #      context: ./blockscount
   #      args:
   #        COIN: ETH
+  #    command: echo $$MIX_ENV && mix do ecto.create, ecto.migrate && mix phx.server
   #    image: maibornwolff/eden:blockscount-explorer
   #    container_name: blockscount-explorer
   #    environment:
   #      - ETHEREUM_JSONRPC_VARIANT=geth
   #      - ETHEREUM_JSONRPC_HTTP_URL=http://localhost:8545
   #      - ETHEREUM_JSONRPC_WS_URL=http://localhost:8546
+  #      - DATABASE_URL=postgresql://postgres:localhost:5432/explorer?ssl=false
+  #      - MIX_ENV=prod
   #    ports:
   #      - 4000:4000
   #    networks:
   #      chainnet:
   #        ipv4_address: 172.25.0.127
+
+  blockscount-postgres:
+    hostname: blockscount-postgres
+    container_name: blockscount-postgres
+    image: postgres:12.5
+    environment:
+      - POSTGRES_PASSWORD=""
+      - POSTGRES_USER="postgres"
+      - POSTGRES_HOST_AUTH_METHOD="trust"
+    ports:
+      - 5432:5432
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.128
 
   monitor:
     hostname: monitor
