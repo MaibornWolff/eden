@@ -4,33 +4,35 @@
 
 **E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable app developers to create new prototypes fast and effectively.
 
-**Contents:**
+## Contents
 
-* Private “proof-of-work” Blockchain (2x Geth) + EthStats Dashboard + Ether Explorer v2
+- Private PoA geth blockchain including bootnode, fullnode, miners, explorers and monitors
 
-* Private “proof-of-authority” Blockchain (6x Parity) + EthStats Dashboard + Ether Explorer v2
+- Private PoW geth blockchain including bootstrapping node, scalabe number of nodes and explorers
 
-* “Toolbox” with Truffle, Oyente and some Utils
+- Private PoA parity blockchain (6x Parity) + EthStats Dashboard + Ether Explorer v2
+
+- Toolbox with Truffle, Oyente and some development utilities
 
 ![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
 
 ## Getting Started
 
-* Get a local copy of the repository, master branch is the latest version available:
+- Get a local copy of the repository, master branch is the latest version available:
 
 ```
 git clone https://github.com/MaibornWolff/eden.git
 ```
 
-* Install [NodeJS](https://nodejs.org)
+- Install [NodeJS](https://nodejs.org)
 
-* Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-* Install [EditorConfig](https://editorconfig.org/#download) plugin for your editor/IDE
+- Install [EditorConfig](https://editorconfig.org/#download) plugin for your editor/IDE
 
 ### Installing
 
-Refer to the README file of each blockchain. They are in the project subfolders. Have fun! :)
+Refer to the README file of each blockchain. They are in the project subfolders.
 
 ## Contributing
 
