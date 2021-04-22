@@ -284,38 +284,39 @@ services:
       chainnet:
         ipv4_address: 172.25.0.126
 
-  #  blockscount-explorer:
-  #    hostname: blockscount-explorer
-  #    depends_on:
-  #      - geth-dev-node
-  #      - blockscount-postgres
-  #    build:
-  #      context: ./blockscount
-  #      args:
-  #        COIN: ETH
-  #    command: echo $$MIX_ENV && mix do ecto.create, ecto.migrate && mix phx.server
-  #    image: maibornwolff/eden:blockscount-explorer
-  #    container_name: blockscount-explorer
-  #    environment:
-  #      - ETHEREUM_JSONRPC_VARIANT=geth
-  #      - ETHEREUM_JSONRPC_HTTP_URL=http://localhost:8545
-  #      - ETHEREUM_JSONRPC_WS_URL=http://localhost:8546
-  #      - DATABASE_URL=postgresql://postgres:localhost:5432/explorer?ssl=false
-  #      - MIX_ENV=prod
-  #    ports:
-  #      - 4000:4000
-  #    networks:
-  #      chainnet:
-  #        ipv4_address: 172.25.0.127
-
-  blockscount-postgres:
-    hostname: blockscount-postgres
-    container_name: blockscount-postgres
-    image: postgres:12.5
+  blockscout-explorer:
+    hostname: blockscout-explorer
+    depends_on:
+      - geth-dev-node
+      - blockscout-postgres
+    build:
+      context: ./blockscout
+      args:
+        COIN: ETH
+    restart: on-failure
+    command: /bin/bash -c "mix do ecto.create, ecto.migrate && mix phx.server"
+    image: maibornwolff/eden:blockscout-explorer
+    container_name: blockscout-explorer
     environment:
-      - POSTGRES_PASSWORD=""
-      - POSTGRES_USER="postgres"
-      - POSTGRES_HOST_AUTH_METHOD="trust"
+      - ETHEREUM_JSONRPC_VARIANT=geth
+      - ETHEREUM_JSONRPC_HTTP_URL=http://172.25.0.110:8545 # blockscout container cannot solve localhost
+      - DATABASE_URL=postgresql://postgres:@host.docker.internal:5432/explorer?ssl=false # host.docker.internal is resolved by docker engine
+      - MIX_ENV=prod
+    ports:
+      - 4000:4000
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.127
+
+  blockscout-postgres:
+    hostname: blockscout-postgres
+    container_name: blockscout-postgres
+    image: postgres:12.5
+    restart: on-failure
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD='' # default for authentication method trust
+      - POSTGRES_USER=postgres # default superuser and owner
     ports:
       - 5432:5432
     networks:
