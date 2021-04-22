@@ -1,1 +1,3 @@
-../README.md
+# Local PoW Ethereum Network
+
+wip
