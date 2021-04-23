@@ -8,9 +8,9 @@
 
 - Private PoA geth blockchain including bootnode, fullnode, miners, explorers and monitors
 
-- Private PoW geth blockchain including bootstrapping node, scalabe number of nodes and explorers
+- Private PoW geth blockchain including bootstrapping node, scalabe number of nodes, explorers and monitors
 
-- Private PoA parity blockchain (6x Parity) + EthStats Dashboard + Ether Explorer v2
+- Private PoA parity blockchain **Note that this setup is deprecated and might not run**
 
 - Toolbox with Truffle, Oyente and some development utilities
 
