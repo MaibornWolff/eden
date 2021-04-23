@@ -299,8 +299,8 @@ services:
     container_name: blockscout-explorer
     environment:
       - ETHEREUM_JSONRPC_VARIANT=geth
-      - ETHEREUM_JSONRPC_HTTP_URL=http://172.25.0.110:8545 # blockscout container cannot solve localhost
-      - DATABASE_URL=postgresql://postgres:@host.docker.internal:5432/explorer?ssl=false # host.docker.internal is resolved by docker engine
+      - ETHEREUM_JSONRPC_HTTP_URL=http://172.25.0.110:8545
+      - DATABASE_URL=postgresql://postgres:@172.25.0.128:5432/explorer?ssl=false
       - MIX_ENV=prod
     ports:
       - 4000:4000
