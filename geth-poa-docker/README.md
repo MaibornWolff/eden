@@ -13,7 +13,7 @@ The testnet consists of several parts:
 
 ## Quick start
 
-Setting up this networks requires you to install Docker and Docker Compose. Clone the repository, and run `docker-compose up` or use Makefile commands from this directory.
+Setting up this network requires you to install Docker and Docker Compose. Clone the repository, and run `docker-compose up` or use Makefile commands from this directory.
 
 ```
 # Start the network
@@ -24,7 +24,7 @@ $ make restart
 $ make stop
 ```
 
-The network should start and synchronize without any further configuration. The networks always uses the latest available versions of Ethereum (geth), the network is set up for clique proof-of-authority similar to the Ethereum Rinkeby testnet.
+The network should start and synchronize without any further configuration. The networks always uses the latest available version of Ethereum (geth), the network is set up for clique proof-of-authority similar to the Ethereum Rinkeby testnet.
 
 ## Topology
 
