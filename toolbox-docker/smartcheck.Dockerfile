@@ -1,0 +1,42 @@
+FROM ubuntu:focal
+
+RUN apt-get update \
+    && apt-get install -y \
+      software-properties-common
+
+# FIX: Install node
+
+# Install solc
+RUN add-apt-repository -y ppa:ethereum/ethereum
+RUN apt-get update \
+    && apt-get install -y solc
+
+# Node.js version management
+RUN npm install -g n
+RUN n stable
+
+# Install solcjs
+RUN npm install -g solc
+
+# Testrpc, now ganache-cli
+RUN npm install -g ganache-cli
+
+RUN npm install -g truffle
+# Hardhat is used as local dependency, e.g in your local project run npm install --save-dev harthat
+
+# @0x/abi-gen enables the generation of TypeScript or Python contract wrappers from ABI files
+RUN npm install -g @0x/abi-gen
+
+# SmartCheck is an extensible static analysis tool for discovering vulnerabilities and other code issues in Ethereum smart contracts written in the Solidity programming language.
+# e.g. smartcheck -p .
+RUN npm install -g @smartdec/smartcheck
+
+# solgraph generating DOT graph that visualizes function control flow of a Solidity contract
+# e.g. solgraph MyContract.sol > MyContract.dot
+RUN npm install -g solgraph --unsafe-perm=true --allow-root
+
+# solhint is a solidity linter
+RUN npm install -g solhint
+
+# solidity-docgen is used to generate documentation from solidity files
+RUN npm install -g solidity-docgen

@@ -1,17 +1,29 @@
-version: '3'
+version: "3"
+
 services:
-  tools:
-    build: .                # dockerfile is in this dir
-    image: maibornwolff/eden:tools
-    container_name: tools
-    stdin_open: true        # equivalent to docker run -i
-    tty: true               # equivalent to docker run -t
-    entrypoint: /bin/bash   # process of our container is the terminal itself
+  toolbox:
+    build:
+      context: .
+      dockerfile: ./oyente.Dockerfile # Exchange with smartcheck.Dockerfile for solc > v0.4.21
+    image: maibornwolff/eden:toolbox
+    container_name: toolbox
+    stdin_open: true # equivalent to docker run -i
+    tty: true # equivalent to docker run -t
+    entrypoint: /bin/bash # process of our container is the terminal itself
     working_dir: /
     volumes:
       - ./volume:/root/volume
       - ./volume/contracts:/oyente/oyente/contracts
       # insert folder with your projects contracts here
     ports:
-      - "8546:8545"
-      # avoid interference with ethereum-docker
+      - 8546:8545
+
+  lite-explorer:
+    depends_on:
+      - toolbox
+    image: alethio/ethereum-lite-explorer
+    container_name: lite-explorer
+    environment:
+      - APP_NODE_URL=http://localhost:8546
+    ports:
+      - 8800:80
