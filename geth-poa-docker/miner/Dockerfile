@@ -4,7 +4,7 @@ RUN apt-get update \
   && apt-get install -y wget software-properties-common \
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR "/root"
+WORKDIR /root
 
 RUN add-apt-repository -y ppa:ethereum/ethereum
 
