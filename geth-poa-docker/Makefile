@@ -1,4 +1,10 @@
-.PHONY: build clean logs reset restart start start-attached stop
+.PHONY: build build-no-cache clean logs reset restart start start-attached stop
+
+build:
+	docker-compose build
+
+build-no-cache:
+	docker-compose build --no-cache
 
 clean:
 	docker-compose down --rmi all --volumes --remove-orphans
