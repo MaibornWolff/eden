@@ -15,12 +15,6 @@ RUN n stable
 # Install solcjs
 RUN npm install -g solc
 
-# Install solc
-# oyente solc default is v0.4.21
-#RUN add-apt-repository -y ppa:ethereum/ethereum
-#RUN apt-get update \
-#    && apt-get install -y solc
-
 # Testrpc, now ganache-cli
 RUN npm install -g ganache-cli
 

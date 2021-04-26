@@ -2,14 +2,17 @@ FROM ubuntu:focal
 
 RUN apt-get update \
     && apt-get install -y \
-      software-properties-common
-
-# FIX: Install node
+      software-properties-common curl
 
 # Install solc
 RUN add-apt-repository -y ppa:ethereum/ethereum
 RUN apt-get update \
     && apt-get install -y solc
+
+# Install Node.js, but manage version via n
+RUN apt-get update \
+    && apt-get install -y \
+      nodejs npm
 
 # Node.js version management
 RUN npm install -g n
