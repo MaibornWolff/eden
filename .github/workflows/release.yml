@@ -1,0 +1,49 @@
+name: Release
+
+# Only if published event is triggered?
+#on:
+#  release:
+#    types: [published]
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: http://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # Classic Docker Hub login
+      #- name: Login to DockerHub
+      #  env:
+      #    DOCKER_USER: ${{secrets.DOCKER_USER}}
+      #    DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      #  run: |
+      #    docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Build images
+        run: npm run build
+
+      - name: Push images to Docker Hub
+        run: npm run deploy
