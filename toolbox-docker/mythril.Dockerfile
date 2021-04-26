@@ -9,19 +9,23 @@ RUN add-apt-repository -y ppa:ethereum/ethereum
 RUN apt-get update \
     && apt-get install -y solc
 
-# Install Node.js, but manage version via n
+# Install mythril
+RUN apt install -y libssl-dev python3-dev python3-pip
+RUN pip3 install mythril
+
+# Install node.js, but manage version via n
 RUN apt-get update \
     && apt-get install -y \
       nodejs npm
 
-# Node.js version management
+# n is node.js version management
 RUN npm install -g n
 RUN n stable
 
 # Install solcjs
 RUN npm install -g solc
 
-# Testrpc, now ganache-cli
+# testrpc, now ganache-cli
 RUN npm install -g ganache-cli
 
 RUN npm install -g truffle
@@ -30,7 +34,7 @@ RUN npm install -g truffle
 # @0x/abi-gen enables the generation of TypeScript or Python contract wrappers from ABI files
 RUN npm install -g @0x/abi-gen
 
-# SmartCheck is an extensible static analysis tool for discovering vulnerabilities and other code issues in Ethereum smart contracts written in the Solidity programming language.
+# smartCheck is an extensible static analysis tool for discovering vulnerabilities and other code issues in Ethereum smart contracts written in the Solidity programming language.
 # e.g. smartcheck -p .
 RUN npm install -g @smartdec/smartcheck
 
