@@ -24,7 +24,7 @@ $ make restart
 $ make stop
 ```
 
-The network should start and synchronize without any further configuration. The networks always uses the latest available version of Ethereum (geth), the network is set up for clique proof-of-authority similar to the Ethereum Rinkeby testnet.
+The network should start and synchronize without any further configuration. The network always uses the latest available version of Ethereum (geth), the network is set up for clique proof-of-authority similar to the Ethereum Rinkeby testnet.
 
 ## Topology
 
