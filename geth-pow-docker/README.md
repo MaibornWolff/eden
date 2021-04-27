@@ -25,4 +25,4 @@ $ make stop
 $ docker-compose up -d --scale geth-node=n
 ```
 
-The network should start and synchronize without any further configuration. The networks always uses the latest available stable version of Ethereum (geth), the network is set up for PoW.
+The network should start and synchronize without any further configuration. The network always uses the latest available stable version of Ethereum (geth), the network is set up for PoW.
