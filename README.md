@@ -10,7 +10,7 @@
 
 - Private PoW geth blockchain including bootstrapping node, scalabe number of nodes, explorers and monitors
 
-- Private PoA parity blockchain **Note that this setup is deprecated and might not run**
+- Private PoA parity blockchain including authorities, members, explorers and monitors
 
 - Toolbox with Truffle, Oyente and some development utilities
 
