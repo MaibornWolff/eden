@@ -1,4 +1,4 @@
-# Local SKALE Network
+# Single node SKALE environment
 
 A set of Docker images to create a local containerized single node environment for developing and testing Ethereum dApps on SKALE.
 
