@@ -1,13 +1,18 @@
 version: "3"
+
 services:
   geth-bootnode:
     hostname: geth-bootnode
     environment:
       - nodekeyhex=08f0e1dee5c1b4645f3331a566009e41a4514b6cd28656d63d0449ecf812812b #Needs to be fix, so that the miners know the resulting enode id
+      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c # enodeId
+      - bootnodeIp=172.25.0.101
     build: ./bootnode
     image: maibornwolff/eden:geth-bootnode
+    container_name: geth-bootnode
     ports:
       - 30301:30301/udp
+      - 30303:30303/udp
     networks:
       chainnet:
         ipv4_address: 172.25.0.101 # The miners need to know the IP address later on
@@ -20,13 +25,23 @@ services:
       - address=0x8cc5a1a0802db41db826c2fcb72423744338dcb0 #derived from the private key which is passed in the args
       - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
       - bootnodeIp=172.25.0.101
+      - nodekeyhex=8eb666d3e8a42bfc7d9e829af60b6d9142d65bef1ecb5897622b4c3ef93377e2
+      - minerId= 2ed7d9205ff27bf8fda964e2f11775498844ba300402f5d582fb04e8abdd2266fe0e33b112d53ed1f237713acbe162e6a68949b04344e4cd9f7939b8cb1e8c3e # enodeId
     build:
       context: ./miner
       args:
         privatekey: df504d175ae63abf209bad9dda965310d99559620550e74521a6798a41215f46 # Please don't do something like this in production, okay?
         password: pass
     image: maibornwolff/eden:geth-dev-miner-1
-    container_name: geth-miner-1
+    container_name: geth-dev-miner-1
+    ports:
+      - 8541:8545
+      - 8542:8546
+    healthcheck:
+      test: wget http://localhost:8545
+      interval: 2s
+      timeout: 5s
+      retries: 30
     volumes:
       - eth-data-1:/root/.ethash
     networks:
@@ -41,13 +56,23 @@ services:
       - address=0x3590aca93338b0721966a8d0c96ebf2c4c87c544 #derived from the private key which is passed in the args
       - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
       - bootnodeIp=172.25.0.101
+      - nodekeyhex=8861389742e9ee2669855a4928a712cec0f275241a359647772df689840c3c6c
+      - minerId=166ed53a196caeaf96d78625bfe1ec557ea21d379e77f8e8d177c9851e7a6869e141f65f49a3dd05752a285df01e150154cff056571f339c9967ccbc7d0c7f0a # enodeId
     build:
       context: ./miner
       args:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: word
     image: maibornwolff/eden:geth-dev-miner-2
-    container_name: geth-miner-2
+    container_name: geth-dev-miner-2
+    ports:
+      - 8543:8545
+      - 8544:8546
+    healthcheck:
+      test: wget http://localhost:8545
+      interval: 2s
+      timeout: 5s
+      retries: 30
     volumes:
       - eth-data-2:/root/.ethash
     networks:
@@ -68,9 +93,10 @@ services:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: word
     image: maibornwolff/eden:geth-dev-node
-    container_name: geth-node
+    container_name: geth-dev-node
     ports:
       - 8545:8545
+      - 8546:8546
     healthcheck:
       test: wget http://localhost:8545
       interval: 2s
@@ -82,78 +108,240 @@ services:
       chainnet:
         ipv4_address: 172.25.0.110
 
-  geth-dev-swarm-1:
-    hostname: geth-dev-swarm-1
-    depends_on:
-      - geth-dev-node
+  clef-1:
+    hostname: clef-1
+    container_name: clef-1
+    image: ethersphere/clef:0.4.9
+    restart: unless-stopped
     environment:
-      - address=8cc5a1a0802db41db826c2fcb72423744338dcb0 #derived from the private key which is passed in the args
-      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
-      - bootnodeIp=172.25.0.101
-    build:
-      context: ./swarm
-      args:
-        privatekey: df504d175ae63abf209bad9dda965310d99559620550e74521a6798a41215f46
-        password: pass
-    image: maibornwolff/eden:geth-dev-swarm-1
-    container_name: geth-swarm-1
+      - CLEF_CHAINID=6660001
     ports:
-      - 8500:8500
-      - 30399:30399/udp
+      - 8550:8550
     volumes:
-      - eth-data-4:/root/.ethash
+      - clef-1:/app/data
+    command: full
     networks:
       chainnet:
         ipv4_address: 172.25.0.111
 
-  geth-dev-swarm-2:
-    hostname: geth-dev-miner-3
-    depends_on:
-      - geth-dev-node
+  bee-1:
+    hostname: bee-1
+    container_name: bee-1
+    image: ethersphere/bee:0.5.3
+    restart: unless-stopped
     environment:
-      - address=3590aca93338b0721966a8d0c96ebf2c4c87c544 #derived from the private key which is passed in the args
-      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
-      - bootnodeIp=172.25.0.101
-    build:
-      context: ./swarm
-      args:
-        privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
-        password: pass
-    image: maibornwolff/eden:geth-dev-swarm-2
-    container_name: geth-swarm-2
+      - BEE_API_ADDR=:1633
+      - BEE_BOOTNODE=
+      - BEE_BOOTNODE_MODE=true
+      - BEE_CLEF_SIGNER_ENABLE=true
+      - BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
+      - BEE_CONFIG
+      - BEE_CORS_ALLOWED_ORIGINS
+      - BEE_DATA_DIR
+      - BEE_DB_CAPACITY
+      - BEE_DB_OPEN_FILES_LIMIT
+      - BEE_DB_BLOCK_CACHE_CAPACITY
+      - BEE_DB_WRITE_BUFFER_SIZE
+      - BEE_DB_DISABLE_SEEKS_COMPACTION
+      - BEE_DEBUG_API_ADDR=:1635
+      - BEE_DEBUG_API_ENABLE=true
+      - BEE_GATEWAY_MODE
+      - BEE_GLOBAL_PINNING_ENABLE
+      - BEE_NAT_ADDR
+      - BEE_NETWORK_ID=6660002
+      - BEE_P2P_ADDR=:1634
+      - BEE_P2P_QUIC_ENABLE
+      - BEE_P2P_WS_ENABLE
+      - BEE_PASSWORD=pass
+      - BEE_PASSWORD_FILE
+      - BEE_PAYMENT_EARLY
+      - BEE_PAYMENT_THRESHOLD
+      - BEE_PAYMENT_TOLERANCE
+      - BEE_RESOLVER_OPTIONS
+      - BEE_STANDALONE
+      - BEE_SWAP_ENABLE
+      - BEE_SWAP_ENDPOINT=http://localhost:8545
+      - BEE_SWAP_FACTORY_ADDRESS
+      - BEE_SWAP_INITIAL_DEPOSIT
+      - BEE_TRACING_ENABLE
+      - BEE_TRACING_ENDPOINT
+      - BEE_TRACING_SERVICE_NAME
+      - BEE_VERBOSITY=trace
+      - BEE_WELCOME_MESSAGE=
     ports:
-      - 8501:8500
-      - 30340:30399/udp
+      - "${API_ADDR:-1633}${BEE_API_ADDR:-:1633}"
+      - "${P2P_ADDR:-1634}${BEE_P2P_ADDR:-:1634}"
+      - "${DEBUG_API_ADDR:-127.0.0.1:1635}${BEE_DEBUG_API_ADDR:-:1635}"
     volumes:
-      - eth-data-5:/root/.ethash
+      - bee-1:/home/bee/.bee
+    command: start
+    depends_on:
+      - clef-1
+      - geth-dev-node
     networks:
       chainnet:
         ipv4_address: 172.25.0.112
+
+  clef-2:
+    hostname: clef-2
+    container_name: clef-2
+    image: ethersphere/clef:0.4.9
+    restart: unless-stopped
+    environment:
+      - CLEF_CHAINID=6660001
+    ports:
+      - 9550:8550
+    volumes:
+      - clef-2:/app/data
+    command: full
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.113
+
+  bee-2:
+    hostname: bee-2
+    container_name: bee-2
+    image: ethersphere/bee:0.5.3
+    restart: unless-stopped
+    environment:
+      - BEE_API_ADDR=:2633
+      - BEE_BOOTNODE=http://localhost:1633 # or 1634 for p2p?
+      - BEE_BOOTNODE_MODE=false
+      - BEE_CLEF_SIGNER_ENABLE=true
+      - BEE_CLEF_SIGNER_ENDPOINT=http://clef-2:9550
+      - BEE_CONFIG
+      - BEE_CORS_ALLOWED_ORIGINS
+      - BEE_DATA_DIR
+      - BEE_DB_CAPACITY
+      - BEE_DB_OPEN_FILES_LIMIT
+      - BEE_DB_BLOCK_CACHE_CAPACITY
+      - BEE_DB_WRITE_BUFFER_SIZE
+      - BEE_DB_DISABLE_SEEKS_COMPACTION
+      - BEE_DEBUG_API_ADDR=:2635
+      - BEE_DEBUG_API_ENABLE=true
+      - BEE_GATEWAY_MODE
+      - BEE_GLOBAL_PINNING_ENABLE
+      - BEE_NAT_ADDR
+      - BEE_NETWORK_ID=6660002
+      - BEE_P2P_ADDR=:2634
+      - BEE_P2P_QUIC_ENABLE
+      - BEE_P2P_WS_ENABLE
+      - BEE_PASSWORD=word
+      - BEE_PASSWORD_FILE
+      - BEE_PAYMENT_EARLY
+      - BEE_PAYMENT_THRESHOLD
+      - BEE_PAYMENT_TOLERANCE
+      - BEE_RESOLVER_OPTIONS
+      - BEE_STANDALONE
+      - BEE_SWAP_ENABLE
+      - BEE_SWAP_ENDPOINT=http://localhost:8545
+      - BEE_SWAP_FACTORY_ADDRESS
+      - BEE_SWAP_INITIAL_DEPOSIT
+      - BEE_TRACING_ENABLE
+      - BEE_TRACING_ENDPOINT
+      - BEE_TRACING_SERVICE_NAME
+      - BEE_VERBOSITY=trace
+      - BEE_WELCOME_MESSAGE
+    ports:
+      - 2633:1633
+      - 2634:1634
+      - 2635:1635
+    volumes:
+      - bee-2:/home/bee/.bee
+    command: start
+    depends_on:
+      - clef-2
+      - geth-dev-node
+      - bee-1
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.114
 
   geth-explorer:
     hostname: geth-explorer
     depends_on:
       - geth-dev-node
-    ports:
-      - 8080:8080
     build: ./explorer
     image: maibornwolff/eden:geth-explorer
     container_name: geth-explorer
+    ports:
+      - 8080:8080
     networks:
       chainnet:
         ipv4_address: 172.25.0.125
 
+  lite-explorer:
+    hostname: lite-explorer
+    depends_on:
+      - geth-dev-node
+    image: alethio/ethereum-lite-explorer
+    container_name: lite-explorer
+    environment:
+      - APP_NODE_URL=http://localhost:8545
+    ports:
+      - 8800:80
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.126
+
+  blockscout-explorer:
+    hostname: blockscout-explorer
+    depends_on:
+      - geth-dev-node
+      - blockscout-postgres
+    build:
+      context: ./blockscout
+      args:
+        COIN: ETH
+    restart: on-failure
+    command: /bin/bash -c "mix do ecto.create, ecto.migrate && mix phx.server"
+    image: maibornwolff/eden:blockscout-explorer
+    container_name: blockscout-explorer
+    environment:
+      - ETHEREUM_JSONRPC_VARIANT=geth
+      - ETHEREUM_JSONRPC_HTTP_URL=http://172.25.0.110:8545
+      - DATABASE_URL=postgresql://postgres:@172.25.0.128:5432/explorer?ssl=false
+      - MIX_ENV=prod
+    ports:
+      - 4000:4000
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.127
+
+  blockscout-postgres:
+    hostname: blockscout-postgres
+    container_name: blockscout-postgres
+    image: postgres:12.5
+    restart: on-failure
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD='' # default for authentication method trust
+      - POSTGRES_USER=postgres # default superuser and owner
+    ports:
+      - 5432:5432
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.128
+
   monitor:
+    hostname: monitor
+    depends_on:
+      - geth-dev-node
     image: buythewhale/ethstats_monitor
+    container_name: monitor
     volumes:
       - ./monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
     networks:
       chainnet:
         ipv4_address: 172.25.0.135
 
-
   dashboard:
+    hostname: dashboard
+    depends_on:
+      - geth-dev-node
+      - monitor
     image: buythewhale/ethstats
+    container_name: dashboard
     volumes:
       - ./dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
@@ -167,12 +355,13 @@ networks:
     driver: bridge
     ipam:
       config:
-      - subnet: 172.25.0.0/24
+        - subnet: 172.25.0.0/24
 
 volumes:
   eth-data-1:
   eth-data-2:
   eth-data-3:
-  eth-data-4:
-  eth-data-5:
-  eth-data-6:
+  clef-1:
+  bee-1:
+  clef-2:
+  bee-2:

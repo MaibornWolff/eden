@@ -1,6 +1,6 @@
 [
   {
-    "name": "authroity0",
+    "name": "authority0",
     "script": "app.js",
     "log_date_format": "YYYY-MM-DD HH:mm Z",
     "merge_logs": false,
@@ -13,7 +13,7 @@
       "RPC_HOST": "authority0",
       "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
-      "INSTANCE_NAME": "authroity0",
+      "INSTANCE_NAME": "authority0",
       "WS_SERVER": "ws://dashboard:3000",
       "WS_SECRET": "123",
       "VERBOSITY": 3

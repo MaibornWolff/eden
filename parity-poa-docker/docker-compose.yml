@@ -1,129 +1,216 @@
-version: "2.1"
+version: "3"
+
 services:
   authority0:
-    image: parity/parity:${PARITY_VERSION}
-    command:
-      --config /parity/config/authority.toml
-      --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+    image: maibornwolff/eden:parity-authority0
+    hostname: authority0
+    container_name: authority0
+    build:
+      context: .
+      dockerfile: ./authority.Dockerfile
+      args:
+        PARITY_VERSION: ${PARITY_VERSION}
+        NETWORK_NAME: ${NETWORK_NAME}
+        ID: 0
     volumes:
-      - ./parity/config:/parity/config:ro
-      - authorities0:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/authority0.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/authority.json:ro
-      - ./parity/keys:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}
-      - ./parity/authorities/authority0.pwd:/parity/authority.pwd:ro
-      - ./parity/node0.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
+      - authority0_volume:/home/parity/.local/share/io.parity.ethereum/chains/${NETWORK_NAME}/db
+    command: --config /parity/config/authority.toml
+      --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+      --ws-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --no-persistent-txqueue
+      --fast-unlock
+      --tracing on
+    ports:
+      - 8545:8545
+      - 8546:8546
+      - 8180:8180
+      - 30303:30303
     networks:
       app_net:
         ipv4_address: 172.16.0.10
 
-
   authority1:
-    image: parity/parity:${PARITY_VERSION}
-    command:
-      --config /parity/config/authority.toml
-      --engine-signer 0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2
+    image: maibornwolff/eden:parity-authority1
+    hostname: authority1
+    container_name: authority1
+    build:
+      context: .
+      dockerfile: ./authority.Dockerfile
+      args:
+        PARITY_VERSION: ${PARITY_VERSION}
+        NETWORK_NAME: ${NETWORK_NAME}
+        ID: 1
     volumes:
-      - ./parity/config:/parity/config:ro
-      - authorities1:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/authority1.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/authority.json:ro
-      - ./parity/authorities/authority1.pwd:/parity/authority.pwd:ro
-      - ./parity/node1.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
+      - authority1_volume:/home/parity/.local/share/io.parity.ethereum/chains/${NETWORK_NAME}/db
+    command: --config /parity/config/authority.toml
+      --engine-signer 0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2
+      --ws-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --no-persistent-txqueue
+      --fast-unlock
+      --tracing on
+    ports:
+      - 8555:8545
+      - 8556:8546
+      - 6180:8180
+      - 40303:30303
     networks:
       app_net:
         ipv4_address: 172.16.0.11
 
-
   authority2:
-    image: parity/parity:${PARITY_VERSION}
-    command:
-      --config /parity/config/authority.toml
-      --engine-signer 0x002e28950558fbede1a9675cb113f0bd20912019
+    image: maibornwolff/eden:parity-authority2
+    hostname: authority2
+    container_name: authority2
+    build:
+      context: .
+      dockerfile: ./authority.Dockerfile
+      args:
+        PARITY_VERSION: ${PARITY_VERSION}
+        NETWORK_NAME: ${NETWORK_NAME}
+        ID: 2
     volumes:
-      - ./parity/config:/parity/config:ro
-      - authorities2:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/authority2.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/authority.json:ro
-      - ./parity/authorities/authority2.pwd:/parity/authority.pwd:ro
-      - ./parity/node2.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
+      - authority2_volume:/home/parity/.local/share/io.parity.ethereum/chains/${NETWORK_NAME}/db
+    command: --config /parity/config/authority.toml
+      --engine-signer 0x002e28950558fbede1a9675cb113f0bd20912019
+      --ws-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --no-persistent-txqueue
+      --fast-unlock
+      --tracing on
+    ports:
+      - 8565:8545
+      - 8566:8546
+      - 7180:8180
+      - 50303:30303
     networks:
       app_net:
         ipv4_address: 172.16.0.12
 
   member0:
-    image: parity/parity:${PARITY_VERSION}
-    command: --config /parity/config/member.toml --ui-no-validation ui
-    volumes:
-      - ./parity/config:/parity/config:ro
-      - ./parity/keys:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}
+    image: maibornwolff/eden:parity-member0
+    hostname: member0
+    container_name: member0
+    build:
+      context: .
+      dockerfile: ./member.Dockerfile
+      args:
+        PARITY_VERSION: ${PARITY_VERSION}
+        NETWORK_NAME: ${NETWORK_NAME}
+    command: --config /parity/config/member.toml
+      --ws-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --no-persistent-txqueue
+      --fast-unlock
+      --tracing on
     ports:
-      - 8180:8180
-      - 8545:8545
-      - 8546:8546
+      - 8575:8545
+      - 8576:8546
+      - 9180:8180
     networks:
       app_net:
         ipv4_address: 172.16.0.20
 
-
   member1:
-    image: parity/parity:${PARITY_VERSION}
+    image: maibornwolff/eden:parity-member1
+    hostname: member1
+    container_name: member1
+    build:
+      context: .
+      dockerfile: ./member.Dockerfile
+      args:
+        PARITY_VERSION: ${PARITY_VERSION}
+        NETWORK_NAME: ${NETWORK_NAME}
     command: --config /parity/config/member.toml
-    volumes:
-      - ./parity/config:/parity/config:ro
+      --ws-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --no-persistent-txqueue
+      --fast-unlock
+      --tracing on
+    ports:
+      - 8585:8545
+      - 8586:8546
+      - 10180:8180
     networks:
       app_net:
         ipv4_address: 172.16.0.21
 
-
   member2:
-    image: parity/parity:${PARITY_VERSION}
+    image: maibornwolff/eden:parity-member2
+    hostname: member2
+    container_name: member2
+    build:
+      context: .
+      dockerfile: ./member.Dockerfile
+      args:
+        PARITY_VERSION: ${PARITY_VERSION}
+        NETWORK_NAME: ${NETWORK_NAME}
     command: --config /parity/config/member.toml
-    volumes:
-      - ./parity/config:/parity/config:ro
+      --ws-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --no-persistent-txqueue
+      --fast-unlock
+      --tracing on
+    ports:
+      - 8595:8545
+      - 8596:8546
+      - 20180:8180
     networks:
       app_net:
         ipv4_address: 172.16.0.22
 
-
   monitor:
     image: buythewhale/ethstats_monitor
+    hostname: monitor
+    container_name: monitor
     volumes:
       - ./monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
     networks:
       app_net:
         ipv4_address: 172.16.0.100
 
-
   dashboard:
     image: buythewhale/ethstats
+    hostname: dashboard
+    container_name: dashboard
     volumes:
       - ./dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
-      - 3001:3000
+      - 3000:3000
     networks:
       app_net:
         ipv4_address: 172.16.0.200
 
-  parity-explorer:
-    hostname: parity-explorer
+  lite-explorer:
+    hostname: lite-explorer
     depends_on:
-      - member0
+      - authority0
+    image: alethio/ethereum-lite-explorer
+    container_name: lite-explorer
+    environment:
+      - APP_NODE_URL=http://localhost:8545
     ports:
-      - 3002:8080
-    build: ./explorer
-    image: maibornwolff/eden:parity-explorer
-    container_name: parity-explorer
+      - 8800:80
     networks:
       app_net:
-        ipv4_address: 172.16.0.201
+        ipv4_address: 172.16.0.90
 
 volumes:
-  authorities0:
-  authorities1:
-  authorities2:
+  authority0_volume:
+  authority1_volume:
+  authority2_volume:
 networks:
   app_net:
     driver: bridge
     ipam:
       driver: default
       config:
-      - subnet: 172.16.0.1/24
-        gateway: 172.16.0.1
+        - subnet: 172.16.0.1/24
+          gateway: 172.16.0.1

@@ -6,6 +6,7 @@ interface = "0.0.0.0"
 cors = ["all"]
 hosts = ["all"]
 apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
+port = 8545
 
 [network]
 bootnodes = [
@@ -18,6 +19,17 @@ bootnodes = [
 password = ["/parity/authority.pwd"]
 
 [mining]
-reseal_on_txs = "none"
-reseal_min_period = 0
-min_gas_price = 0
+reseal_on_txs = "all"
+reseal_min_period = 1000
+reseal_max_period = 5000
+gas_floor_target = "0x165A0BC00"
+tx_queue_size = 16384
+tx_queue_mem_limit = 4096
+tx_queue_per_sender = 16384
+
+[websockets]
+disable = false
+port = 8546
+apis = ["pubsub","parity_pubsub","shh", "shh_pubsub", "web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
+interface = "0.0.0.0"
+hosts = ["all"]
