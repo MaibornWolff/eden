@@ -1,44 +1,39 @@
 {
-    "name": "mw-eden",
-    "description": "Ethereum Development Environment from MaibornWolff GmbH",
-    "version": "0.1.0",
-    "license": "MIT",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/MaibornWolff/eden"
-    },
-    "scripts": {
-        "start:geth:pow": "cd geth-pow-docker && docker-compose up -d ",
-        "start:parity:poa": "cd parity-poa-docker && docker-compose up -d ",
-        "stop:geth:pow": "cd geth-pow-docker && docker-compose stop ",
-        "stop:parity:poa": "cd parity-poa-docker && docker-compose stop "
-    },
-    "author": {
-        "name": "MaibornWolff GmbH",
-        "email": "eden@maibornwolff.de"
-    },
-    "contributors": [
-        "Frank Polster <frank.polster@maibornwolff.de>",
-        "Florian Maier <florian.maier@maibornwolff.de>",
-        "Simon Dosch <simon.dosch@maibornwolff.de>",
-        "Deniz Toprak <deniz.toprak@maibornwolff.de>"
-    ],
-    "release": {
-      "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        "@semantic-release/github"
-      ]
-    },
-    "devDependencies": {
-        "@commitlint/cli": "^7.5.2",
-        "@commitlint/config-conventional": "^7.5.0",
-        "husky": "^1.3.1",
-        "semantic-release": "^15.13.3"
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-        }
+  "name": "mw-eden",
+  "description": "Ethereum Development Environment and Network from MaibornWolff GmbH",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MaibornWolff/eden"
+  },
+  "author": {
+    "name": "MaibornWolff GmbH",
+    "email": "eden@maibornwolff.de"
+  },
+  "contributors": [
+    "Frank Polster <frank.polster@maibornwolff.de>",
+    "Florian Maier <florian.maier@maibornwolff.de>",
+    "Simon Dosch <simon.dosch@maibornwolff.de>",
+    "Deniz Toprak <deniz.toprak@maibornwolff.de>",
+    "Myron Rotter <myron.rotter@maibornwolff.de>"
+  ],
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "husky": "^1.3.1",
+    "semantic-release": "^15.13.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  }
 }
