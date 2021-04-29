@@ -1,6 +1,6 @@
-# Local IPFS cluster
+# Local IPFS network
 
-A local dockerized IPFS cluster including three IPFS peers and three corresponding IPFS clusters.
+A set of Docker images to create a local dockerized IPFS network including three IPFS peers and three corresponding IPFS clusters.
 
 The testnet consists of the following parts:
 
