@@ -1,9 +1,16 @@
 {
   "config": {
     "chainId": 456719,
-    "homesteadBlock": 0,
-    "eip155Block": 0,
-    "eip158Block": 0
+    "homesteadBlock": 1,
+    "eip150Block": 2,
+    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "eip155Block": 3,
+    "eip158Block": 3,
+    "byzantiumBlock": 4,
+    "constantinopleBlock": 5,
+    "petersburgBlock": 6,
+    "istanbulBlock": 7,
+    "berlinBlock": 8
   },
   "nonce": "0x0000000000000042",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -14,6 +21,9 @@
   "extraData": "0x",
   "gasLimit": "0x8000000",
   "alloc": {
+    "0x3590aca93338b0721966a8d0c96ebf2c4c87c544": {
+      "balance": "20000000000000000000"
+    },
     "0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f": {
       "balance": "20000000000000000000"
     },
