@@ -14,6 +14,8 @@
 
 - Toolbox with Truffle, Oyente and some development utilities
 
+- Open-Ethereum development chain including explorer, monitor and dashboard
+
 ![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
 
 ## Getting Started
