@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  dev-chain:
+    image: openethereum/openethereum:latest
+    hostname: dev-chain
+    container_name: dev-chain
+    command: --config dev
+      --jsonrpc-interface all
+      --reseal-min-period 0
+      --gas-price-percentile 0
+    ports:
+      - 8545:8545
+      - 8546:8546
+      - 30303:30303
+      - 30303:30303/udp
+
+  lite-explorer:
+    hostname: lite-explorer
+    depends_on:
+      - dev-chain
+    image: alethio/ethereum-lite-explorer
+    container_name: lite-explorer
+    environment:
+      - APP_NODE_URL=http://localhost:8545
+    ports:
+      - 8800:80
+
+  monitor:
+    image: buythewhale/ethstats_monitor
+    hostname: monitor
+    container_name: monitor
+    volumes:
+      - ./monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+
+  dashboard:
+    image: buythewhale/ethstats
+    hostname: dashboard
+    container_name: dashboard
+    volumes:
+      - ./dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
+    ports:
+      - 3000:3000

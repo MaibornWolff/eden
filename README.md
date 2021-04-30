@@ -18,6 +18,8 @@
 
 - Private IPFS network including IPFS peers and clusters
 
+- Open-Ethereum development chain including explorer, monitor and dashboard
+
 ![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
 
 ## Getting Started
