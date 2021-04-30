@@ -16,6 +16,10 @@
 
 - Toolbox with Truffle, Oyente, Smartcheck and Mythril as analyzer as well as other development utilities
 
+- Single SKALE node environment
+
+![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
+
 ## Getting Started
 
 - Get a local copy of the repository, master branch is the latest version available:
