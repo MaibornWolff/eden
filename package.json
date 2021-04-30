@@ -26,14 +26,14 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.5.2",
-    "@commitlint/config-conventional": "^7.5.0",
-    "husky": "^1.3.1",
-    "semantic-release": "^15.13.3"
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "husky": "^6.0.0",
+    "semantic-release": "^17.4.2"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "scripts": {
+    "prepare": "husky install",
+    "build": "chmod +x ./scripts/build.sh && ./scripts/build.sh",
+    "deploy": "chmod +x ./scripts/deploy.sh && ./scripts/deploy.sh"
   }
 }

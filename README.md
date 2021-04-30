@@ -4,6 +4,8 @@
 
 **E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable app developers to create new prototypes fast and effectively.
 
+![Screenshot of the EDEN dashboard](/docs/images/dashboard.png)
+
 ## Contents
 
 - Private PoA geth blockchain including bootnode, fullnode, miners, explorers and monitors
@@ -12,9 +14,7 @@
 
 - Private PoA parity blockchain including authorities, members, explorers and monitors
 
-- Toolbox with Truffle, Oyente and some development utilities
-
-![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
+- Toolbox with Truffle, Oyente, Smartcheck and Mythril as analyzer as well as other development utilities
 
 ## Getting Started
 
@@ -40,7 +40,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Versioning
 
-We use [SemVer](http://semver.org) for versioning. For the versions available, see the [tags on this repository](tags).
+We use [SemVer](http://semver.org) for versioning.
 
 ## Authors
 
