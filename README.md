@@ -20,8 +20,6 @@
 
 - Open-Ethereum development chain including explorer, monitor and dashboard
 
-![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
-
 ## Getting Started
 
 - Get a local copy of the repository, master branch is the latest version available:
