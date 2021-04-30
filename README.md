@@ -1,7 +1,5 @@
 # Ethereum Development Environment and Network (EDEN)
 
-[![Build Status](https://travis-ci.com/MaibornWolff/eden.svg?branch=master)](https://travis-ci.com/MaibornWolff/eden)
-
 **E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable app developers to create new prototypes fast and effectively.
 
 ![Screenshot of the EDEN dashboard](/docs/images/dashboard.png)
