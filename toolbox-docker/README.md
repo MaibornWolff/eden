@@ -1,47 +1,19 @@
-# GET STARTED:
+# Dockerized toolbox for smart contract and dApp development
 
-Build the docker container using:
+Dockerized toolbox with various pre-configured tools, e.g. **n** for node versions, **ganache-cli** as testrpc, **solcjs** and **solc**, **truffle** as dApp development suite (alternatively, use **hardhat** as project dependency), **oyente** and/or **smartcheck** as a static/dynamic smart contract analyzer. Additionally, it comes with various tools, such as **@0x/abi-gen**, **solhint**, **solidity-docgen** and **solgraph**.
+Replace `dockerfile` in `docker-compose.yml` either with `oyente.Dockerfile` for oyente and smartcheck as analyzer for solc <= v0.4.21 or `mythril.Dockerfile` for mythril and smartcheck as analyzer for solc <= latest. The `volume` directory is shared with the toolbox container. Simply, create a project locally in `volume` in order to evaluate, test and develop the project with the toolbox.
+
+## Quick start
+
+Setting up this dockerized toolbox requires you to install Docker and Docker Compose. Clone the repository, and use Makefile commands from this directory.
+
 ```
-user$   docker-compose build
-```
-
-Start the container and attach to its console whith:
-```
-user$   docker-compose up -d && docker attach tools
-```
-
-
-# CONTENTS:
-
-## truffle
-
-The "volume" folder is shared with the container and we can use
-```
-~/volume#   mkdir my_project && cd my_project
-~/volume#   truffle init
-```
-to make a new project that will also show up on our local environment.
-
-
-## oyente
-
-We can use the oyente.py script to check our smart contract for common mistakes and bugs
-```
-oyente/oyente#   python oyente.py -s ~/volume/contracts/example.sol
-```
-
-## testrpc
-
-testrpc is also installed, learn how to use it at:
-
-https://github.com/ethereumjs/testrpc
-
-port is mapped to 8546, not 8545 to avoid interference with 'ethereum-docker' testnet.
-
-
-## string utils
-
-the string utils can be found at
-```
-~/volume/contracts/strings.sol
+# Start the dockerized toolbox and attach /bin/bash
+$ make start-attached-bash
+# Start the dockerized setup and start ganache-cli
+$ make start-ganache-cli
+# Attach /bin/bash when setup is started
+$ make attach-bash
+# Stop the dockerized setup
+$ make stop
 ```
