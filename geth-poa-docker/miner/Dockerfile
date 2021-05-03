@@ -1,5 +1,7 @@
 FROM ubuntu:xenial
 
+LABEL org.opencontainers.image.source https://github.com/maibornwolff/eden
+
 RUN apt-get update \
   && apt-get install -y wget software-properties-common \
   && rm -rf /var/lib/apt/lists/*

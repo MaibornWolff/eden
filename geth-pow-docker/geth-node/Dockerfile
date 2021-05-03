@@ -1,5 +1,7 @@
 FROM ethereum/client-go:stable
 
+LABEL org.opencontainers.image.source https://github.com/maibornwolff/eden
+
 WORKDIR /root
 
 COPY ./start.sh .
