@@ -2,7 +2,7 @@ version: "3"
 
 services:
   bootstrap-mining:
-    image: maibornwolff/eden:bootstrap-mining
+    image: ghcr.io/maibornwolff/eden:bootstrap-mining
     build:
       context: ./bootstrap-mining
     restart: on-failure
@@ -22,7 +22,7 @@ services:
       retries: 30
 
   geth-node:
-    image: maibornwolff/eden:geth-node
+    image: ghcr.io/maibornwolff/eden:geth-node
     build:
       context: ./geth-node
     restart: on-failure

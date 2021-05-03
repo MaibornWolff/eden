@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./oyente.Dockerfile # Exchange with mythril.Dockerfile for solc > v0.4.21
-    image: maibornwolff/eden:toolbox
+    image: ghcr.io/maibornwolff/eden:toolbox
     container_name: toolbox
     stdin_open: true # equivalent to docker run -i
     tty: true # equivalent to docker run -t
