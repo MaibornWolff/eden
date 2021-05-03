@@ -2,7 +2,7 @@ version: "3"
 
 services:
   authority0:
-    image: ghcr.io/maibornwolff/eden:parity-authority0
+    image: ghcr.io/maibornwolff/eden/parity-authority0
     hostname: authority0
     container_name: authority0
     build:
@@ -32,7 +32,7 @@ services:
         ipv4_address: 172.16.0.10
 
   authority1:
-    image: ghcr.io/maibornwolff/eden:parity-authority1
+    image: ghcr.io/maibornwolff/eden/parity-authority1
     hostname: authority1
     container_name: authority1
     build:
@@ -62,7 +62,7 @@ services:
         ipv4_address: 172.16.0.11
 
   authority2:
-    image: ghcr.io/maibornwolff/eden:parity-authority2
+    image: ghcr.io/maibornwolff/eden/parity-authority2
     hostname: authority2
     container_name: authority2
     build:
@@ -92,7 +92,7 @@ services:
         ipv4_address: 172.16.0.12
 
   member0:
-    image: ghcr.io/maibornwolff/eden:parity-member0
+    image: ghcr.io/maibornwolff/eden/parity-member0
     hostname: member0
     container_name: member0
     build:
@@ -117,7 +117,7 @@ services:
         ipv4_address: 172.16.0.20
 
   member1:
-    image: ghcr.io/maibornwolff/eden:parity-member1
+    image: ghcr.io/maibornwolff/eden/parity-member1
     hostname: member1
     container_name: member1
     build:
@@ -142,7 +142,7 @@ services:
         ipv4_address: 172.16.0.21
 
   member2:
-    image: ghcr.io/maibornwolff/eden:parity-member2
+    image: ghcr.io/maibornwolff/eden/parity-member2
     hostname: member2
     container_name: member2
     build:

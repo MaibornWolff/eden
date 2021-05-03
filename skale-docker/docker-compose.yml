@@ -24,7 +24,7 @@ services:
       - 0.0.0.0:1233:1233/tcp
 
   schain-explorer:
-    image: ghcr.io/maibornwolff/eden:schain-explorer
+    image: ghcr.io/maibornwolff/eden/schain-explorer
     hostname: schain-explorer
     container_name: schain-explorer
     build:

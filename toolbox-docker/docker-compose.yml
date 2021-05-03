@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./oyente.Dockerfile
-    image: ghcr.io/maibornwolff/eden:toolbox-oyente
+    image: ghcr.io/maibornwolff/eden/toolbox-oyente
     container_name: toolbox-oyente
     stdin_open: true # equivalent to docker run -i
     tty: true # equivalent to docker run -t
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./mythril.Dockerfile
-    image: ghcr.io/maibornwolff/eden:toolbox-mythril
+    image: ghcr.io/maibornwolff/eden/toolbox-mythril
     container_name: toolbox-mythril
     stdin_open: true # equivalent to docker run -i
     tty: true # equivalent to docker run -t
