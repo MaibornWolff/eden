@@ -30,5 +30,5 @@ jobs:
       - name: Build images
         run: npm run build
 
-      - name: Push images to Docker Hub
+      - name: Push images
         run: npm run deploy
