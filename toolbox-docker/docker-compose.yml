@@ -1,12 +1,12 @@
 version: "3"
 
 services:
-  toolbox:
+  toolbox-oyente:
     build:
       context: .
-      dockerfile: ./oyente.Dockerfile # Exchange with mythril.Dockerfile for solc > v0.4.21
-    image: maibornwolff/eden:toolbox
-    container_name: toolbox
+      dockerfile: ./oyente.Dockerfile
+    image: maibornwolff/eden:toolbox-oyente
+    container_name: toolbox-oyente
     stdin_open: true # equivalent to docker run -i
     tty: true # equivalent to docker run -t
     entrypoint: /bin/bash # process of our container is the terminal itself
@@ -16,14 +16,40 @@ services:
       - ./volume/contracts:/oyente/oyente/contracts
       # insert folder with your projects contracts here
     ports:
-      - 8546:8545
+      - 6545:8545
 
-  lite-explorer:
+  toolbox-mythril:
+    build:
+      context: .
+      dockerfile: ./mythril.Dockerfile
+    image: maibornwolff/eden:toolbox-mythril
+    container_name: toolbox-mythril
+    stdin_open: true # equivalent to docker run -i
+    tty: true # equivalent to docker run -t
+    entrypoint: /bin/bash # process of our container is the terminal itself
+    working_dir: /
+    volumes:
+      - ./volume:/root/volume
+      # insert folder with your projects contracts here
+    ports:
+      - 7545:8545
+
+  lite-explorer-oyente:
     depends_on:
-      - toolbox
+      - toolbox-oyente
     image: alethio/ethereum-lite-explorer
-    container_name: lite-explorer
+    container_name: lite-explorer-oyente
     environment:
-      - APP_NODE_URL=http://localhost:8546
+      - APP_NODE_URL=http://localhost:6545
     ports:
       - 8800:80
+
+  lite-explorer-mythril:
+    depends_on:
+      - toolbox-mythril
+    image: alethio/ethereum-lite-explorer
+    container_name: lite-explorer-mythril
+    environment:
+      - APP_NODE_URL=http://localhost:7545
+    ports:
+      - 8008:80
