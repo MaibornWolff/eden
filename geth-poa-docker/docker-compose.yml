@@ -262,7 +262,7 @@ services:
     depends_on:
       - geth-dev-node
     build: ./explorer
-    image: maibornwolff/eden:geth-explorer
+    image: ghcr.io/maibornwolff/eden:geth-explorer
     container_name: geth-explorer
     ports:
       - 8080:8080
