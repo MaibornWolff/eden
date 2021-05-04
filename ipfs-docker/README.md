@@ -27,19 +27,21 @@ Cluster REST API specification can be found [here](https://cluster.ipfs.io/docum
 
 ## Quick start
 
-Setting up this network requires you to install Docker and Docker Compose. Clone the repository, and use Makefile commands from this directory.
+Setting up this network requires you to install Docker and Docker Compose. Clone the repository, use Makefile commands from this directory.
 
-```
+```bash
 # Set up cluster secret
-cp ./.env.example ./.env
+$ cp ./.env.example ./.env
 # Or
-export CLUSTER_SECRET=$(od -vN 32 -An -tx1 /dev/urandom | tr -d ' \n')
+$ export CLUSTER_SECRET=$(od -vN 32 -An -tx1 /dev/urandom | tr -d ' \n')
 
 # Start the network
 $ make start
 # Stop the network
 $ make stop
-# Clean environments
+# Restart the network
+$ make restart
+# Clean environment
 $ make clean
 ```
 

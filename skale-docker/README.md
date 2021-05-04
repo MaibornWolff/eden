@@ -11,15 +11,15 @@ The environment consists of the following parts:
 
 Setting up this development environment requires you to install Docker and Docker Compose. Clone the repository and use Makefile commands from this directory.
 
-```
+```bash
 # Build images and setup volumes
 $ make build
-# Start the network
+# Start the development chain after build process
 $ make start
-# Stop the network
+# Stop the setup
 $ make stop
 ```
 
-The development environment is set up for ethash proof-of-work.
+The development environment is set up for ethash PoW.
 
 RPC is exposed at `http://localhost:1234`. Instead of the containerized explorer at `localhost:3000`, you can also use the official SKALE block explorer at `https://explorer.skale.network/`.
