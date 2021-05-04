@@ -5,21 +5,37 @@ The `volume` directory is shared with the toolbox containers. Simply, create a p
 
 ## Quick start
 
-Setting up this dockerized toolboxes requires you to install Docker and Docker Compose. Clone the repository, and use Makefile commands from this directory.
+Setting up this dockerized toolboxes requires you to install Docker and Docker Compose. Clone the repository and use Makefile commands from this directory.
 
-```
-# Start the dockerized toolbox-oyente and attach /bin/bash
-$ make start-attached-bash-oyente
-# Start the dockerized toolbox-mythril and attach /bin/bash
-$ make start-attached-bash-mythril
-# Start the dockerized setup and start ganache-cli
-$ make start-ganache-cli-oyente
-# Or
-$ make start-ganache-cli-mythril
-# Attach /bin/bash when setup is started
-$ make attach-bash-oyente
-# Or
-$ make attach-bash-mythril
-# Stop the dockerized setup
+```bash
+# Start the toolbox setup
+make start
+# Stop the toolbox setup
 $ make stop
+# Restart the toolbox setup
+$ make restart
+```
+
+For solc <= v0.4.21 with oyente python scripts and smartcheck as smart contract analyzer use the following commands.
+
+```bash
+# Attach to /bin/bash when setup is started
+$ make attach-bash-oyente
+
+# Start the setup and attach directly to /bin/bash for toolbox with oyente and smartcheck
+$ make start-attached-bash-oyente
+# Start the setup and start ganache-cli for toolbox with oyente and smartcheck
+$ make start-ganache-cli-oyente
+```
+
+For solc > v0.4.21 with mythril and smartcheck as smart contract analyzer use the following commands.
+
+```bash
+# Attach to /bin/bash when setup is started
+$ make attach-bash-mythril
+
+# Start the setup and attach directly to /bin/bash for toolbox with mythril and smartcheck
+$ make start-attached-bash-mythril
+# Start the setup and start ganache-cli for toolbox with mythril and smartcheck
+$ make start-ganache-cli-mythril
 ```
