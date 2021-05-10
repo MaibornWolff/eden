@@ -14,6 +14,8 @@
 
 - Toolbox with Truffle, Oyente and some development utilities
 
+- Single SKALE node environment
+
 ![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
 
 ## Getting Started
