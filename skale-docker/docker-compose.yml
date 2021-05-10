@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  schain:
+    # docker run -v "/$(pwd)/data_dir:/data_dir" -p 0.0.0.0:1234:1234/tcp -p 0.0.0.0:1233:1233/tcp -e DATA_DIR=/data_dir -i -t skalenetwork/schain:3.4.7-develop.0 --http-port 1234 --ws-port 1233 --config /data_dir/config.json -d /data_dir --ipcpath /data_dir -v 3 --web3-trace --enable-debug-behavior-apis --aa no
+    image: skalenetwork/schain:3.6.1-develop.0
+    hostname: schain
+    container_name: schain
+    volumes:
+      - ./schain/data_dir:/data_dir
+    environment:
+      - DATA_DIR=/data_dir
+    command: --http-port 1234
+      --ws-port 1233
+      --config /data_dir/config.json
+      -d /data_dir
+      --ipcpath /data_dir
+      -v 3
+      --web3-trace
+      --enable-debug-behavior-apis
+      --aa no
+    ports:
+      - 0.0.0.0:1234:1234/tcp
+      - 0.0.0.0:1233:1233/tcp
+
+  schain-explorer:
+    image: maibornwolff/eden:schain-explorer
+    hostname: schain-explorer
+    container_name: schain-explorer
+    build:
+      context: ./explorer
+    depends_on:
+      - schain
+    ports:
+      - 3000:3000

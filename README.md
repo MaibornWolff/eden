@@ -16,6 +16,9 @@
 
 - Private IPFS network including IPFS peers and clusters
 
+- Single SKALE node environment
+
+
 ![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
 
 ## Getting Started
