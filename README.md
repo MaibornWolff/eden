@@ -1,8 +1,8 @@
 # Ethereum Development Environment and Network (EDEN)
 
-[![Build Status](https://travis-ci.com/MaibornWolff/eden.svg?branch=master)](https://travis-ci.com/MaibornWolff/eden)
-
 **E**thereum **D**evelopment **E**nvironment and **N**etwork is a collection of tools and templates to enable app developers to create new prototypes fast and effectively.
+
+![Screenshot of the EDEN dashboard](/docs/images/dashboard.png)
 
 ## Contents
 
@@ -12,15 +12,13 @@
 
 - Private PoA parity blockchain including authorities, members, explorers and monitors
 
-- Toolbox with Truffle, Oyente and some development utilities
-
-- Open-Ethereum development chain including explorer, monitor and dashboard
-
-- Private IPFS network including IPFS peers and clusters
+- Toolbox with Truffle, Oyente, Smartcheck and Mythril as analyzer as well as other development utilities
 
 - Single SKALE node environment
 
-![Screenshot of the EDEN dashboard](/doc/img/eden_grafik.png)
+- Private IPFS network including IPFS peers and clusters
+
+- Open-Ethereum development chain including explorer, monitor and dashboard
 
 ## Getting Started
 
@@ -46,7 +44,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Versioning
 
-We use [SemVer](http://semver.org) for versioning. For the versions available, see the [tags on this repository](tags).
+We use [SemVer](http://semver.org) for versioning.
 
 ## Authors
 

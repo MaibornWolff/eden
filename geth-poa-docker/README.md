@@ -5,7 +5,7 @@ A set of Docker images to create a local PoA Ethereum network with one bootnode,
 The testnet consists of several parts:
 
 - 1 bootnode: registers existing nodes on the network, discovery service.
-- 2 miners: also called **sealers** within proof-of-authority (PoA). They validate the blocks.
+- 2 miners: also called **sealers** within PoA. They validate the blocks.
 - 1 fullnode: this serves as **transaction relay** and is a fullnode that does not mine, is locked but has RPC exposed.
 - 2 swarm bee nodes: these nodes make up the **peer-to-peer CDN**.
 - 3 blockchain explorer: 2 lightweight web applications to explore the blockchain and 1 blockscout explorer.
@@ -13,9 +13,9 @@ The testnet consists of several parts:
 
 ## Quick start
 
-Setting up this network requires you to install Docker and Docker Compose. Clone the repository, and run `docker-compose up` or use Makefile commands from this directory.
+Setting up this network requires you to install Docker and Docker Compose. Clone the repository, run `docker-compose up` or use Makefile commands from this directory.
 
-```
+```bash
 # Start the network
 $ make start
 # Restart the network
@@ -36,15 +36,23 @@ The nodes in the network are connecting with the bootnode. This is a special Eth
 
 There are three nodes that participate in the network. The state is synchronized between them and they are trying to create blocks with mining. Initially, they connect to the bootnode with the information derived from the fixed IP and the `nodekeyhex`. If you want to interact with the network, you need to connect via RPC. You can attach a geth instance, connect Remix IDE or connect your browser with web3 and build a dApp.
 
-The RPC Ports of the nodes are mapped to your localhost, the addresses are:
+The RPC ports of the nodes are mapped to your localhost, the addresses are:
 
 - geth-dev-miner-1: [http://localhost:8541](http://localhost:8541)
 - geth-dev-miner-2: [http://localhost:8543](http://localhost:8543)
 - geth-dev-node: [http://localhost:8545](http://localhost:8545)
 
-### Swarm bee / IPFS
+### Swarm bee
 
-Work in progress
+Swarm is a decentralised data storage and content distribution technology, in other words, it is the "decentralized storage piece in dApps".
+The primary objective of Swarm is to provide a sufficiently decentralized and redundant store of Ethereum’s public record, in particular to store and distribute dapp code and data as well as blockchain data.
+Swarm Bee is the successor of the Ethereum Swarm client aiming for a production-ready version of Swarm.
+Note that Bee does not currently expose every feature of the original Swarm client
+
+The ports of the nodes are mapped to your localhost, the addresses are:
+
+- bee-1: [http://localhost:1633](http://localhost:1633)
+- bee-2: [http://localhost:2633](http://localhost:2633)
 
 ### Blockchain explorer
 

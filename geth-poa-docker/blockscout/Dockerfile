@@ -1,5 +1,7 @@
 FROM bitwalker/alpine-elixir-phoenix:1.11.3
 
+LABEL org.opencontainers.image.source https://github.com/maibornwolff/eden
+
 RUN apk --no-cache --update add alpine-sdk gmp-dev automake libtool inotify-tools autoconf python3 git
 
 # Get Rust

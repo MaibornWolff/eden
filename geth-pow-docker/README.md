@@ -11,10 +11,10 @@ The testnet consists of several parts:
 
 ## Quick start
 
-Setting up this network requires you to install Docker and Docker Compose. Clone the repository, and run `docker-compose up` or use Makefile commands from this directory.
+Setting up this network requires you to install Docker and Docker Compose. Clone the repository, run `docker-compose up` or use Makefile commands from this directory.
 
-```
-# Start the network
+```bash
+# Start the network with one fullnode
 $ make start
 # Restart the network
 $ make restart

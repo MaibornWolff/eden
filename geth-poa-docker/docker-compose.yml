@@ -8,7 +8,7 @@ services:
       - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c # enodeId
       - bootnodeIp=172.25.0.101
     build: ./bootnode
-    image: maibornwolff/eden:geth-bootnode
+    image: ghcr.io/maibornwolff/eden/geth-bootnode
     container_name: geth-bootnode
     ports:
       - 30301:30301/udp
@@ -32,7 +32,7 @@ services:
       args:
         privatekey: df504d175ae63abf209bad9dda965310d99559620550e74521a6798a41215f46 # Please don't do something like this in production, okay?
         password: pass
-    image: maibornwolff/eden:geth-dev-miner-1
+    image: ghcr.io/maibornwolff/eden/geth-dev-miner-1
     container_name: geth-dev-miner-1
     ports:
       - 8541:8545
@@ -63,7 +63,7 @@ services:
       args:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: word
-    image: maibornwolff/eden:geth-dev-miner-2
+    image: ghcr.io/maibornwolff/eden/geth-dev-miner-2
     container_name: geth-dev-miner-2
     ports:
       - 8543:8545
@@ -92,7 +92,7 @@ services:
       args:
         privatekey: bc5b578e0dcb2dbf98dd6e5fe62cb5a28b84a55e15fc112d4ca88e1f62bd7c35
         password: word
-    image: maibornwolff/eden:geth-dev-node
+    image: ghcr.io/maibornwolff/eden/geth-dev-node
     container_name: geth-dev-node
     ports:
       - 8545:8545
@@ -262,7 +262,7 @@ services:
     depends_on:
       - geth-dev-node
     build: ./explorer
-    image: maibornwolff/eden:geth-explorer
+    image: ghcr.io/maibornwolff/eden/geth-explorer
     container_name: geth-explorer
     ports:
       - 8080:8080
@@ -295,7 +295,7 @@ services:
         COIN: ETH
     restart: on-failure
     command: /bin/bash -c "mix do ecto.create, ecto.migrate && mix phx.server"
-    image: maibornwolff/eden:blockscout-explorer
+    image: ghcr.io/maibornwolff/eden/blockscout-explorer
     container_name: blockscout-explorer
     environment:
       - ETHEREUM_JSONRPC_VARIANT=geth

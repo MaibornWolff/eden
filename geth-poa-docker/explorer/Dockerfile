@@ -1,5 +1,7 @@
 FROM node:6.11-alpine
 
+LABEL org.opencontainers.image.source https://github.com/maibornwolff/eden
+
 WORKDIR "/opt"
 
 RUN apk add --update git make g++ && \

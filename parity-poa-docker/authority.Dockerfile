@@ -1,6 +1,8 @@
 ARG PARITY_VERSION=${PARITY_VERSION}
 FROM parity/parity:${PARITY_VERSION}
 
+LABEL org.opencontainers.image.source https://github.com/maibornwolff/eden
+
 ARG NETWORK_NAME=${NETWORK_NAME}
 ARG ID=${ID}
 
